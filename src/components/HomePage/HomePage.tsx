@@ -141,7 +141,7 @@ export default function HomePage() {
           </div>
           <div className={styles['cards-row']}>
             {nyttig.map((kort) => (
-              <div key={kort.id} className={styles['card-col']} style={{ cursor: 'pointer' }} onClick={() => alert(`Åpner: ${kort.tittel}`)}>
+              <div key={kort.id} className={styles['card-col']}>
                 <Card variant="default" data-color="neutral" className={styles['nyttig-card']}>
                   <img src={kort.bildeSrc} alt="" className={styles.image} />
                   <CardBlock>

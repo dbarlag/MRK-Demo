@@ -233,7 +233,7 @@ export default function TimeplanPage() {
                 </div>
               </div>
               <div className={styles['right-content']}>
-                <div className={styles.chevron} style={{ cursor: 'pointer' }} onClick={() => setActiveFilters(new Set(ALL_FILTERS))}>
+                <div className={styles.chevron} style={{ cursor: 'pointer' }} role="button" tabIndex={0} aria-label="Vis alle filter" onClick={() => setActiveFilters(new Set(ALL_FILTERS))} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setActiveFilters(new Set(ALL_FILTERS)); }}>
                   <div className={styles['vector-2']}>
                     <svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M0.653193 0.783732L8.00005 6.90611L15.3469 0.783732" stroke="#2B2B2B" strokeWidth="2"/> </svg>
                   </div>

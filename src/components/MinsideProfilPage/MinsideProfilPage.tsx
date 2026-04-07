@@ -59,15 +59,16 @@ function EditModal({ title, fields, onSave, onCancel }: {
           <label key={f.key} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--ds-size-1)' }}>
             <Paragraph data-size="sm" variant="default">{f.label}</Paragraph>
             <input
+              required
               value={values[f.key]}
               onChange={(e) => setValues((v) => ({ ...v, [f.key]: e.target.value }))}
-              style={{ padding: 'var(--ds-size-3)', border: '1px solid var(--ds-color-neutral-border-default)', borderRadius: 'var(--ds-border-radius-md)', fontSize: 'inherit' }}
+              style={{ padding: 'var(--ds-size-3)', border: `1px solid ${!values[f.key].trim() ? 'var(--ds-color-danger-border-default)' : 'var(--ds-color-neutral-border-default)'}`, borderRadius: 'var(--ds-border-radius-md)', fontSize: 'inherit' }}
             />
           </label>
         ))}
         <div style={{ display: 'flex', gap: 'var(--ds-size-4)', justifyContent: 'flex-end' }}>
           <Button variant="tertiary" data-color="neutral" onClick={onCancel}>Avbryt</Button>
-          <Button variant="primary" data-color="primary" onClick={() => onSave(values)}>Lagre</Button>
+          <Button variant="primary" data-color="primary" onClick={() => { if (Object.values(values).every((v) => v.trim())) onSave(values); }}>Lagre</Button>
         </div>
       </div>
     </ModalBackdrop>
