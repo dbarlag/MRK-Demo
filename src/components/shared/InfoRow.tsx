@@ -26,8 +26,8 @@ export default function InfoRow({
   valueColorClass = 'info-value-success',
 }: InfoRowProps) {
   return (
-    <div className={styles.line1} aria-hidden="true">
-      {iconSrc && <img src={iconSrc} alt="" className={styles['icon-right']} />}
+    <div className={styles.line1}>
+      {iconSrc && <img src={iconSrc} alt="" aria-hidden="true" className={styles['icon-right']} />}
       <div className={styles[wrapperClass]}>
         <Paragraph data-size="sm" variant="default" className={styles[labelClass]}>{label}</Paragraph>
       </div>
