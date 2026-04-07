@@ -1,33 +1,45 @@
-const BASE = '/api';
+import { mockUser, mockParorende, mockErklaringer } from '@/data/mockUser';
+import { mockMedlemskap, mockAktiviteter, mockRoller, mockVerv } from '@/data/mockEngagement';
+import { mockKurser, mockSprak, mockSertifikater } from '@/data/mockCompetence';
+import { mockEvents, mockPameldinger } from '@/data/mockTimeplan';
+import { mockNyttigKort, mockTjenester } from '@/data/mockDashboard';
+import type { UserProfile, Parorende, Erklering, Medlemskap, Aktivitet, Rolle, Verv, Kurs, Sprak, Sertifikat, TimeplanEvent, NyttigKort, TjenesteKategori } from '@/types';
 
-async function get<T>(path: string): Promise<T> {
-  const res = await fetch(`${BASE}${path}`);
-  if (!res.ok) throw new Error(`API error: ${res.status}`);
-  return res.json();
+const isStatic = typeof window !== 'undefined' && !window.location.port;
+
+async function get<T>(path: string, fallback: T): Promise<T> {
+  if (isStatic) return fallback;
+  try {
+    const res = await fetch(`/api${path}`);
+    if (!res.ok) throw new Error(`API error: ${res.status}`);
+    return res.json();
+  } catch {
+    return fallback;
+  }
 }
 
 // User
-export const fetchProfile = () => get<import('@/types').UserProfile>('/user/profile');
-export const fetchParorende = () => get<import('@/types').Parorende[]>('/user/parorende');
-export const fetchErklaringer = () => get<import('@/types').Erklering[]>('/user/erklaringer');
+export const fetchProfile = () => get<UserProfile>('/user/profile', mockUser);
+export const fetchParorende = () => get<Parorende[]>('/user/parorende', mockParorende);
+export const fetchErklaringer = () => get<Erklering[]>('/user/erklaringer', mockErklaringer);
 
 // Engagement
-export const fetchMedlemskap = () => get<import('@/types').Medlemskap>('/user/medlemskap');
-export const fetchAktiviteter = () => get<import('@/types').Aktivitet[]>('/user/aktiviteter');
-export const fetchRoller = () => get<import('@/types').Rolle[]>('/user/roller');
-export const fetchVerv = () => get<import('@/types').Verv[]>('/user/verv');
+export const fetchMedlemskap = () => get<Medlemskap>('/user/medlemskap', mockMedlemskap);
+export const fetchAktiviteter = () => get<Aktivitet[]>('/user/aktiviteter', mockAktiviteter);
+export const fetchRoller = () => get<Rolle[]>('/user/roller', mockRoller);
+export const fetchVerv = () => get<Verv[]>('/user/verv', mockVerv);
 
 // Competence
-export const fetchKurser = () => get<import('@/types').Kurs[]>('/user/kurser');
-export const fetchSprak = () => get<import('@/types').Sprak[]>('/user/spraker');
-export const fetchSertifikater = () => get<import('@/types').Sertifikat[]>('/user/sertifikater');
+export const fetchKurser = () => get<Kurs[]>('/user/kurser', mockKurser);
+export const fetchSprak = () => get<Sprak[]>('/user/spraker', mockSprak);
+export const fetchSertifikater = () => get<Sertifikat[]>('/user/sertifikater', mockSertifikater);
 
 // Timeplan
-export const fetchTimeplan = () => get<import('@/types').TimeplanEvent[]>('/timeplan');
-export const fetchPameldinger = () => get<import('@/types').TimeplanEvent[]>('/timeplan/pameldinger');
+export const fetchTimeplan = () => get<TimeplanEvent[]>('/timeplan', mockEvents);
+export const fetchPameldinger = () => get<TimeplanEvent[]>('/pameldinger', mockPameldinger);
 
 // Dashboard
-export const fetchDashboard = () => get<{
-  nyttig: import('@/types').NyttigKort[];
-  tjenester: import('@/types').TjenesteKategori[];
-}>('/dashboard');
+export const fetchDashboard = () => get<{ nyttig: NyttigKort[]; tjenester: TjenesteKategori[] }>(
+  '/dashboard',
+  { nyttig: mockNyttigKort, tjenester: mockTjenester }
+);

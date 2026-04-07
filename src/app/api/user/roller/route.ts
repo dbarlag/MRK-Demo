@@ -1,3 +1,4 @@
+export const dynamic = "force-static";
 import { NextResponse } from 'next/server';
 import { vakt } from '@/lib/vakt-client';
 import type { Rolle } from '@/types';
