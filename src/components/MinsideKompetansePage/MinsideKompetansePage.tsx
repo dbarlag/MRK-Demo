@@ -26,6 +26,29 @@ function SectionHeader({ title }: { title: string }) {
   );
 }
 
+function ModalBackdrop({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handleEsc);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      role="dialog"
+      aria-modal="true"
+    >
+      {children}
+    </div>
+  );
+}
+
 function EditListModal({ title, items, labelKey, valueKey, onSave, onCancel }: {
   title: string;
   items: { label: string; value: string }[];
@@ -45,7 +68,7 @@ function EditListModal({ title, items, labelKey, valueKey, onSave, onCancel }: {
   const removeRow = (idx: number) => setRows((prev) => prev.filter((_, i) => i !== idx));
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+    <ModalBackdrop onClose={onCancel}>
       <div style={{ background: 'var(--ds-color-neutral-background-default)', borderRadius: 'var(--ds-border-radius-xl)', padding: 'var(--ds-size-8)', maxWidth: '500px', width: '90%', display: 'flex', flexDirection: 'column', gap: 'var(--ds-size-4)', maxHeight: '80vh', overflow: 'auto' }}>
         <Heading data-size="sm" level={3}>{title}</Heading>
         {rows.map((row, i) => (
@@ -86,7 +109,7 @@ function EditListModal({ title, items, labelKey, valueKey, onSave, onCancel }: {
           <Button variant="primary" data-color="primary" onClick={() => onSave(rows)}>Lagre</Button>
         </div>
       </div>
-    </div>
+    </ModalBackdrop>
   );
 }
 
