@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, Card, CardBlock, Divider, Heading, Paragraph } from 'rk-designsystem';
 import SiteHeader from '../shared/SiteHeader';
+import LoadingSpinner from '../shared/LoadingSpinner';
 import { fetchProfile, fetchDashboard } from '@/lib/api';
 import type { UserProfile, NyttigKort, TjenesteKategori } from '@/types';
 import styles from './HomePage.module.css';

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Divider, Heading } from 'rk-designsystem';
 import SiteHeader from '../shared/SiteHeader';
+import LoadingSpinner from '../shared/LoadingSpinner';
 import MinsideTopSection from '../shared/MinsideTopSection';
 import ActivityCard from '../shared/ActivityCard';
 import { fetchMedlemskap, fetchAktiviteter, fetchRoller, fetchVerv } from '@/lib/api';

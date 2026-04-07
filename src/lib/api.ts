@@ -24,6 +24,7 @@ export const fetchSertifikater = () => get<import('@/types').Sertifikat[]>('/use
 
 // Timeplan
 export const fetchTimeplan = () => get<import('@/types').TimeplanEvent[]>('/timeplan');
+export const fetchPameldinger = () => get<import('@/types').TimeplanEvent[]>('/timeplan/pameldinger');
 
 // Dashboard
 export const fetchDashboard = () => get<{

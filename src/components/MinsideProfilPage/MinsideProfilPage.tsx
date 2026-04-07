@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Avatar, Button, Divider, Heading, Paragraph } from 'rk-designsystem';
 import SiteHeader from '../shared/SiteHeader';
+import LoadingSpinner from '../shared/LoadingSpinner';
 import MinsideTopSection from '../shared/MinsideTopSection';
 import InfoRow from '../shared/InfoRow';
 import { fetchProfile, fetchParorende, fetchErklaringer } from '@/lib/api';
@@ -105,7 +106,7 @@ export default function MinsideProfilPage() {
     isDragging.current = false;
   }, []);
 
-  if (!user) return null;
+  if (!user) return <LoadingSpinner />;
 
   const handleSaveProfile = (values: Record<string, string>) => {
     setUser((prev) => prev ? { ...prev, phone: values.phone, email: values.email, address: values.address } : prev);

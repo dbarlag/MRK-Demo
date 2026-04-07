@@ -230,3 +230,36 @@ export const mockEvents: TimeplanEvent[] = [
     status: 'Åpent for påmelding',
   },
 ];
+
+export const mockPameldinger: TimeplanEvent[] = [
+  {
+    id: '101',
+    dag: 'Man',
+    dato: 14,
+    maaned: 'OKT',
+    tittel: 'Norsktrening',
+    startTid: '17:00',
+    sluttTid: '19:00',
+    type: 'vakt',
+    typeLabel: 'Vakt',
+    frist: '08.10.2024',
+    tattePlasser: 10,
+    totalePlasser: 15,
+    status: 'Påmeldt',
+  },
+  {
+    id: '102',
+    dag: 'Ons',
+    dato: 23,
+    maaned: 'OKT',
+    tittel: 'Omsorgskurs',
+    startTid: '18:00',
+    sluttTid: '21:00',
+    type: 'kurs',
+    typeLabel: 'Kurs',
+    frist: '17.10.2024',
+    tattePlasser: 10,
+    totalePlasser: 15,
+    status: 'Påmeldt',
+  },
+];

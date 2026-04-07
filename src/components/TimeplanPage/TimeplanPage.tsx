@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, Heading, Pagination, Paragraph, Tabs, usePagination } from 'rk-designsystem';
 import SiteHeader from '../shared/SiteHeader';
+import LoadingSpinner from '../shared/LoadingSpinner';
 import { fetchTimeplan } from '@/lib/api';
 import type { TimeplanEvent } from '@/types';
 import styles from './TimeplanPage.module.css';
@@ -198,7 +199,7 @@ export default function TimeplanPage() {
         {/* Tabs + Calendar + Chips */}
         <div className={styles['menu-tabs']}>
           <div className={styles['tabs-wrapper']}>
-            <Tabs data-color="primary" defaultValue="kommende" onChange={(val: string) => setActiveTab(val as any)}>
+            <Tabs data-color="primary" defaultValue="kommende" onChange={(val: string) => setActiveTab(val as 'kommende' | 'mine-påmeldinger')}>
               <Tabs.List>
                 <Tabs.Tab value="kommende">
                   <img src="/images/2b47fd00-8df3-4e4b-95b0-52d5ececcf32.png" alt="" className="tab-icon" />
