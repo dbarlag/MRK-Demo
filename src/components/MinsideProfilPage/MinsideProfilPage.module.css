@@ -1,0 +1,46 @@
+/* Generated CSS Module - Original Figma values with renamed classes */
+
+.wrapper { width: 100%; align-self: stretch; }
+.back-btn { color: var(--ds-color-neutral-text-subtle, #5d5d5d); }
+.btn-wrapper { height: 48px; width: fit-content; }
+.page-heading { --ds-heading-lg-font-weight: 400; }
+.heading-fill { width: 100%; flex-grow: 1; flex-shrink: 0; flex-basis: 0; text-align: left; }
+.top { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: var(--ds-size-2); align-items: center; box-sizing: border-box; padding-left: var(--ds-size-2); padding-right: var(--ds-size-2); }
+.page-top { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-1); box-sizing: border-box; padding-left: var(--ds-size-4); padding-right: var(--ds-size-4); }
+.tabs-wrapper { width: 100%; }
+.avatar-initial { --ds-heading-sm-font-weight: 400; }
+.avatar-inner { width: 44px; max-width: 100%; height: 100%; text-align: center; }
+.avatar-wrapper { width: 88px; max-width: 100%; height: 88px; }
+.info-heading { --ds-heading-xs-font-weight: 700; }
+.info-heading-wrapper { width: 100%; text-align: left; }
+.icon-right { width: 24px; max-width: 100%; height: 24px; object-fit: cover; display: block; aspect-ratio: 1.0000; flex-shrink: 1; overflow: hidden; }
+.info-label { --ds-body-sm-font-weight: 600; font-family: 'Myriad Pro', sans-serif; }
+.info-cell { text-align: left; width: fit-content; }
+.info-value { font-family: 'Myriad Pro', sans-serif; }
+.line1 { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: 10px; align-items: center; }
+.element { width: 100%; height: auto; flex-grow: 1; flex-shrink: 0; flex-basis: 0; display: flex; flex-direction: column; gap: var(--ds-size-1); }
+.section1 { width: 100%; height: auto; flex-grow: 1; flex-shrink: 0; flex-basis: 0; min-width: 475px; display: flex; flex-direction: row; gap: var(--ds-size-2); }
+.sections { width: 100%; height: auto; align-self: stretch; min-width: 475px; display: flex; flex-direction: row; gap: var(--ds-size-2); flex-wrap: wrap; }
+.data { width: 100%; height: auto; flex-grow: 1; flex-shrink: 0; flex-basis: 0; display: flex; flex-direction: column; gap: var(--ds-size-2); }
+.user { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: var(--ds-size-4); flex-wrap: wrap; }
+.primary-btn { background-color: var(--ds-color-primary-color-red-background-tinted, #fcf1f0); color: var(--ds-color-secondary-color-orange-text-subtle, #a03e1d); }
+.actions-right { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: 10px; justify-content: flex-end; }
+.section-me { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-4); box-sizing: border-box; padding-left: var(--ds-size-6); padding-right: var(--ds-size-6); padding-top: var(--ds-size-6); padding-bottom: var(--ds-size-6); background-color: var(--ds-color-neutral-background-default); border: 1px solid var(--ds-color-neutral-border-subtle); border-radius: var(--ds-border-radius-xl); overflow: hidden; }
+.section-heading { --ds-heading-sm-font-weight: 600; font-family: 'Myriad Pro', sans-serif; }
+.section-heading-wrapper { width: 100%; height: 26px; flex-grow: 1; flex-shrink: 0; flex-basis: 0; text-align: left; }
+.add-btn { background-color: var(--ds-color-neutral-base-default, #1e1e1e); color: var(--ds-color-neutral-background-default, #ffffff); }
+.section-top-row { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: 10px; justify-content: space-between; align-items: center; }
+.section-top { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-1); }
+.section2 { width: 100%; height: auto; align-self: stretch; min-width: 475px; display: flex; flex-direction: row; gap: var(--ds-size-2); }
+.info-section-compact { width: 1152px; max-width: 100%; height: 104px; min-width: 475px; display: flex; flex-direction: row; gap: var(--ds-size-2); }
+.parent-card { width: 475px; max-width: 100%; height: auto; display: flex; flex-direction: column; gap: var(--ds-size-4); box-sizing: border-box; padding-left: var(--ds-size-6); padding-right: var(--ds-size-6); padding-top: var(--ds-size-6); padding-bottom: var(--ds-size-6); background-color: var(--ds-color-neutral-background-default); border: 1px solid var(--ds-color-neutral-border-subtle); border-radius: var(--ds-border-radius-xl); overflow: hidden; }
+.gallery { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: var(--ds-size-4); align-items: center; overflow: hidden; }
+.section-parents { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-4); align-items: center; }
+.card { width: 475px; min-width: 475px; max-width: 100%; height: 100%; display: flex; flex-direction: column; gap: var(--ds-size-4); box-sizing: border-box; padding-left: var(--ds-size-6); padding-right: var(--ds-size-6); padding-top: var(--ds-size-6); padding-bottom: var(--ds-size-6); background-color: var(--ds-color-neutral-background-default); border: 1px solid var(--ds-color-neutral-border-subtle); border-radius: var(--ds-border-radius-xl); overflow: hidden; flex-shrink: 0; }
+.status-valid { color: var(--ds-color-success-text-subtle, #056d13); font-family: 'Myriad Pro', sans-serif; }
+.section-clearance { width: 475px; min-width: 475px; max-width: 100%; height: auto; display: flex; flex-direction: column; gap: var(--ds-size-4); align-items: center; flex-shrink: 0; }
+.declarations-gallery { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: var(--ds-size-4); align-items: center; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; cursor: grab; }
+.declarations-gallery::-webkit-scrollbar { display: none; }
+.declarations-gallery:active { cursor: grabbing; }
+.page-body { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-4); align-items: center; box-sizing: border-box; padding-left: var(--ds-size-30); padding-right: var(--ds-size-30); padding-top: var(--ds-size-8); padding-bottom: var(--ds-size-8); }
+.profil-page { width: 100%; max-width: 1440px; margin: 0 auto; height: auto; display: flex; flex-direction: column; align-items: center; background-color: var(--ds-color-primary-color-red-background-tinted); }

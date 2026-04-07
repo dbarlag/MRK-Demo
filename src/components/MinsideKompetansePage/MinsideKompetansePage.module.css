@@ -1,0 +1,35 @@
+/* Generated CSS Module - Original Figma values with renamed classes */
+
+.wrapper { width: 100%; align-self: stretch; }
+.back-btn { color: var(--ds-color-neutral-text-subtle, #5d5d5d); }
+.btn-wrapper { height: 48px; width: fit-content; }
+.page-heading { --ds-heading-lg-font-weight: 400; }
+.heading-fill { width: 100%; flex-grow: 1; flex-shrink: 0; flex-basis: 0; text-align: left; }
+.top { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: var(--ds-size-2); align-items: center; box-sizing: border-box; padding-left: var(--ds-size-2); padding-right: var(--ds-size-2); }
+.page-top { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-1); box-sizing: border-box; padding-left: var(--ds-size-4); padding-right: var(--ds-size-4); }
+.tabs-wrapper { width: 100%; }
+.section-title { --ds-heading-sm-font-weight: 600; font-family: 'Myriad Pro', sans-serif; }
+.section-title-wrapper { width: 100%; height: 26px; flex-grow: 1; flex-shrink: 0; flex-basis: 0; text-align: left; }
+.section-top-row { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: 10px; justify-content: space-between; align-items: center; }
+.section-top { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-1); }
+.card-heading { --ds-heading-xs-font-weight: 700; }
+.status-tag { border: none; box-shadow: none; outline: none; --ds-border-width-default: 0px; --ds-color-border-default: transparent; --ds-color-border-subtle: transparent; --ds-color-border-strong: transparent; border-radius: 2px; }
+.tag-wrapper { height: 32px; width: fit-content; }
+.card-top { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: 10px; align-items: center; }
+.icon-right { width: 24px; max-width: 100%; height: 24px; object-fit: cover; display: block; aspect-ratio: 1.0000; flex-shrink: 1; overflow: hidden; }
+.info-label { --ds-body-sm-font-weight: 600; font-family: 'Myriad Pro', sans-serif; }
+.info-cell { text-align: left; width: fit-content; }
+.info-value { font-family: 'Myriad Pro', sans-serif; }
+.line1 { width: 100%; height: 24px; align-self: stretch; display: flex; flex-direction: row; gap: 10px; align-items: center; }
+.body { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-4); }
+.course-card { width: 475px; max-width: 100%; height: 100%; display: flex; flex-direction: column; gap: var(--ds-size-4); box-sizing: border-box; padding-left: var(--ds-size-6); padding-right: var(--ds-size-6); padding-top: var(--ds-size-6); padding-bottom: var(--ds-size-6); background-color: var(--ds-color-neutral-background-default); border: 1px solid var(--ds-color-neutral-border-subtle); border-radius: var(--ds-border-radius-xl); overflow: hidden; }
+.activity-gallery { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: var(--ds-size-4); align-items: center; overflow: hidden; }
+.section-membership { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-4); align-items: center; }
+.divider-wrapper { width: 1152px; max-width: 100%; }
+.primary-btn { background-color: var(--ds-color-primary-color-red-background-tinted, #fcf1f0); color: var(--ds-color-secondary-color-orange-text-subtle, #a03e1d); }
+.actions-right { width: 100%; height: 48px; align-self: stretch; display: flex; flex-direction: row; gap: 10px; justify-content: flex-end; }
+.detail-card { width: 475px; max-width: 100%; height: auto; display: flex; flex-direction: column; gap: var(--ds-size-4); box-sizing: border-box; padding-left: var(--ds-size-6); padding-right: var(--ds-size-6); padding-top: var(--ds-size-6); padding-bottom: var(--ds-size-6); background-color: var(--ds-color-neutral-background-default); border: 1px solid var(--ds-color-neutral-border-subtle); border-radius: var(--ds-border-radius-xl); overflow: hidden; }
+.page-body { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-4); align-items: center; box-sizing: border-box; padding-left: var(--ds-size-30); padding-right: var(--ds-size-30); padding-top: var(--ds-size-8); padding-bottom: var(--ds-size-8); }
+.activity-card { width: 475px; max-width: 100%; height: 100%; display: flex; flex-direction: column; gap: var(--ds-size-4); box-sizing: border-box; padding-left: var(--ds-size-6); padding-right: var(--ds-size-6); padding-top: var(--ds-size-6); padding-bottom: var(--ds-size-6); background-color: var(--ds-color-neutral-background-default); border: 1px solid var(--ds-color-neutral-border-subtle); border-radius: var(--ds-border-radius-xl); overflow: hidden; }
+.footer { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-4); }
+.kompetanse-page { width: 100%; max-width: 1440px; margin: 0 auto; height: auto; display: flex; flex-direction: column; align-items: center; background-color: var(--ds-color-primary-color-red-background-tinted); overflow: hidden; }

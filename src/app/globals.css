@@ -1,0 +1,17 @@
+/* Global styles */
+
+* { box-sizing: border-box; }
+
+body { margin: 0; padding: 0; }
+
+.btn-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.tab-icon {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+  margin-right: 0.4em;
+}

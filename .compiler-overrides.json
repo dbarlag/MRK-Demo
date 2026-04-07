@@ -1,0 +1,40 @@
+{
+  "_comment": "Add event handlers and custom code that survive design re-pushes. See data-figma-id attributes in generated JSX for node IDs.",
+  "components": {
+    "HomePage": {
+      "nodeOverrides": {},
+      "componentCode": {
+        "imports": "",
+        "hooks": ""
+      }
+    },
+    "MinsideProfilPage": {
+      "nodeOverrides": {},
+      "componentCode": {
+        "imports": "",
+        "hooks": ""
+      }
+    },
+    "MInsideEngasjementPage": {
+      "nodeOverrides": {},
+      "componentCode": {
+        "imports": "",
+        "hooks": ""
+      }
+    },
+    "MInsideKompetansePage": {
+      "nodeOverrides": {},
+      "componentCode": {
+        "imports": "",
+        "hooks": ""
+      }
+    },
+    "TimeplanPage": {
+      "nodeOverrides": {},
+      "componentCode": {
+        "imports": "",
+        "hooks": ""
+      }
+    }
+  }
+}
