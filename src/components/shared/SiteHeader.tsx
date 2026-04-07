@@ -1,5 +1,7 @@
 'use client';
 
+import { assetPath } from '@/lib/basePath';
+
 import { Header } from 'rk-designsystem';
 
 const NAV_ITEMS = [
@@ -13,7 +15,7 @@ interface SiteHeaderProps {
   secondaryLogoSrc?: string;
 }
 
-export default function SiteHeader({ secondaryLogoSrc = '/images/28cee95e-f238-4c62-8519-15bcf9175329.png' }: SiteHeaderProps) {
+export default function SiteHeader({ secondaryLogoSrc = assetPath('/images/28cee95e-f238-4c62-8519-15bcf9175329.png') }: SiteHeaderProps) {
   return (
     <Header
       data-color="primary"

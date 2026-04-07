@@ -1,5 +1,7 @@
 'use client';
 
+import { assetPath } from '@/lib/basePath';
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, Heading, Pagination, Paragraph, Tabs, usePagination } from 'rk-designsystem';

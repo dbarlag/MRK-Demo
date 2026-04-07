@@ -1,3 +1,4 @@
+import { assetPath } from '@/lib/basePath';
 import type { NyttigKort, TjenesteKategori } from '@/types';
 
 export const mockNyttigKort: NyttigKort[] = [
@@ -6,14 +7,14 @@ export const mockNyttigKort: NyttigKort[] = [
     subtittel: 'Subtitle top',
     tittel: 'Card title',
     beskrivelse: 'Most provide as with carried business are much better more the perfected designer. Writing slightly explain desk unable at supposedly about this',
-    bildeSrc: '/images/8e25fd9d-f245-434d-87f5-a15ffcd09fc9.png',
+    bildeSrc: assetPath('/images/8e25fd9d-f245-434d-87f5-a15ffcd09fc9.png'),
   },
   {
     id: '2',
     subtittel: 'Subtitle top',
     tittel: 'Card title',
     beskrivelse: 'Most provide as with carried business are much better more the perfected designer. Writing slightly explain desk unable at supposedly about this',
-    bildeSrc: '/images/ba7aa2ee-bef2-4156-8589-44d097ed683c.png',
+    bildeSrc: assetPath('/images/ba7aa2ee-bef2-4156-8589-44d097ed683c.png'),
   },
 ];
 

@@ -1,5 +1,7 @@
 'use client';
 
+import { assetPath } from '@/lib/basePath';
+
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Avatar, Button, Divider, Heading, Paragraph } from 'rk-designsystem';
 import { PencilIcon, TrashIcon, PlusIcon, ExternalLinkIcon, UploadIcon } from '@navikt/aksel-icons';
