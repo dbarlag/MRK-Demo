@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, Heading, Pagination, Paragraph, Tabs, usePagination } from 'rk-designsystem';
+import { ArrowLeftIcon, CalendarIcon, ClipboardCheckmarkIcon, ClockIcon, XMarkIcon, PersonCheckmarkIcon, PersonGroupIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import { fetchTimeplan, fetchPameldinger } from '@/lib/api';
@@ -69,7 +70,7 @@ function EventCard({ event }: { event: TimeplanEvent }) {
               <p className={isArrangement ? styles['start-time'] : styles['kurs-text']}>{event.typeLabel}</p>
             </div>
             <div className={styles.deadline}>
-              <img src="/images/4b1f3f20-9e00-4474-8106-b9bea3b270bd.png" alt="" className={styles['icon-arragement']} />
+              <ClockIcon aria-hidden="true" className={styles['icon-arragement']} />
               <p className={styles.frist}>Frist:</p>
               <p className={styles['element-2']}>{event.frist}</p>
             </div>
@@ -80,12 +81,12 @@ function EventCard({ event }: { event: TimeplanEvent }) {
       <div className={styles.underline}>
         <div className={styles.volunteer}>
           <div className={styles.accepted}>
-            <img src="/images/2a4ecf9c-8b94-44e0-99bb-152a79fca0bf.png" alt="" className={styles['icon-arragement']} />
+            <PersonCheckmarkIcon aria-hidden="true" className={styles['icon-arragement']} />
             <p className={styles.takenseats}>{event.tattePlasser}</p>
           </div>
           <p className={styles.av}>av</p>
           <div className={styles.accepted}>
-            <img src="/images/8eab9d7f-6e22-4577-83a3-3e8428853bc1.png" alt="" className={styles['icon-arragement']} />
+            <PersonGroupIcon aria-hidden="true" className={styles['icon-arragement']} />
             <p className={styles.takenseats}>{event.totalePlasser}</p>
           </div>
         </div>
@@ -186,7 +187,7 @@ export default function TimeplanPage() {
           <div className={styles['btn-wrapper']}>
             <Link href="/" style={{ textDecoration: 'none' }}>
               <Button loading={false} showIconRight={false} showIconLeft variant="tertiary" data-color="neutral" className={styles['back-btn']}>
-                <img src="/images/4c4a0483-3b2f-4057-8fcf-18ed6edcd8bb.png" alt="" className="btn-icon" />
+                <ArrowLeftIcon aria-hidden="true" style={{ width: '1em', height: '1em' }} />
                 Tilbake
               </Button>
             </Link>
@@ -204,17 +205,17 @@ export default function TimeplanPage() {
             <Tabs data-color="primary" defaultValue="kommende" onChange={(val: string) => setActiveTab(val as 'kommende' | 'mine-påmeldinger')}>
               <Tabs.List>
                 <Tabs.Tab value="kommende">
-                  <img src="/images/2b47fd00-8df3-4e4b-95b0-52d5ececcf32.png" alt="" className="tab-icon" />
+                  <CalendarIcon aria-hidden="true" style={{ width: '1.2em', height: '1.2em', verticalAlign: 'middle', marginRight: '0.4em' }} />
                   Kommende
                 </Tabs.Tab>
                 <Tabs.Tab value="mine-påmeldinger">
-                  <img src="/images/97b266af-4528-4331-b844-72047e56e6c8.png" alt="" className="tab-icon" />
+                  <ClipboardCheckmarkIcon aria-hidden="true" style={{ width: '1.2em', height: '1.2em', verticalAlign: 'middle', marginRight: '0.4em' }} />
                   Mine påmeldinger
                 </Tabs.Tab>
               </Tabs.List>
             </Tabs>
           </div>
-          <img src="/images/ba32031a-79dd-4cb9-9cc1-ee15a1cc66b4.png" alt="Kalender" className={styles.iconbutton} style={{ cursor: 'pointer' }} />
+          <CalendarIcon aria-label="Kalender" className={styles.iconbutton} style={{ cursor: 'pointer' }} />
           <div className={styles.multisuggestion}>
             <div className={styles.input}>
               <div className={styles['left-content']}>
@@ -225,7 +226,7 @@ export default function TimeplanPage() {
                         <div className={styles['chip-text']}>
                           <Paragraph data-size="sm" variant="short">{FILTER_LABELS[filter]}</Paragraph>
                         </div>
-                        <img src="/images/263ec143-ad98-4623-b58a-144172dc9ccf.png" alt={`Fjern ${FILTER_LABELS[filter]}`} className={styles['x-mark']} />
+                        <XMarkIcon aria-label={`Fjern ${FILTER_LABELS[filter]}`} className={styles['x-mark']} />
                       </div>
                     ) : null
                   )}

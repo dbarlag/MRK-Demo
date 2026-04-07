@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Button, Divider, Heading, Paragraph } from 'rk-designsystem';
+import { PencilIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import MinsideTopSection from '../shared/MinsideTopSection';
@@ -172,7 +173,7 @@ export default function MinsideKompetansePage() {
                 <div className={styles['btn-wrapper']}>
                   <Button loading={false} showIconRight showIconLeft={false} variant="primary" data-color="primary" className={styles['primary-btn']} onClick={() => setEditingSprak(true)}>
                     Endre
-                    <img src="/images/ef634807-2608-4174-ac7d-77f34d45062d.png" alt="" className="btn-icon" />
+                    <PencilIcon aria-hidden="true" style={{ width: "1em", height: "1em" }} />
                   </Button>
                 </div>
               </div>
@@ -197,7 +198,7 @@ export default function MinsideKompetansePage() {
                 <div className={styles['btn-wrapper']}>
                   <Button loading={false} showIconRight showIconLeft={false} variant="primary" data-color="primary" className={styles['primary-btn']} onClick={() => setEditingSertifikater(true)}>
                     Endre
-                    <img src="/images/b279a2ae-0084-46ec-b6c5-dca85ae9db34.png" alt="" className="btn-icon" />
+                    <PencilIcon aria-hidden="true" style={{ width: "1em", height: "1em" }} />
                   </Button>
                 </div>
               </div>

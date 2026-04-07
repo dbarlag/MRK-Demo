@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, Card, CardBlock, Divider, Heading, Paragraph } from 'rk-designsystem';
+import { PersonIcon, CalendarIcon, MegaphoneSpeakingIcon, BookIcon, ChevronRightIcon, ExternalLinkIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import { fetchProfile, fetchDashboard } from '@/lib/api';
@@ -59,7 +60,7 @@ export default function HomePage() {
                 onClick={() => window.open('https://rodekors.no/tilbakemelding', '_blank')}
               >
                 Gi tilbakemelding
-                <img src="/images/a140560f-1c59-4564-ae0d-43206ee17ad4.png" alt="" className="btn-icon" />
+                <ExternalLinkIcon aria-hidden="true" style={{ width: '1em', height: '1em' }} />
               </Button>
             </div>
           </div>
@@ -70,7 +71,7 @@ export default function HomePage() {
           <div className={styles['nav-links-row']}>
             <Link href="/profil" className={styles.link}>
               <div className={styles.icon}>
-                <img src="/images/dcaf353a-1b79-4e14-a7b9-5d495e87dc4b.png" alt="" className={styles.person} />
+                <PersonIcon aria-hidden="true" className={styles.person} />
               </div>
               <div className={styles.body}>
                 <div className={styles['text-full-width']}>
@@ -80,11 +81,11 @@ export default function HomePage() {
                   <Paragraph data-size="sm" variant="default" className={styles['nav-link-text']}>Opplysninger om deg</Paragraph>
                 </div>
               </div>
-              <img src="/images/e713192d-31c7-4f23-896a-cf7ea5a55b39.png" alt="" className={styles.iconbutton} />
+              <ChevronRightIcon aria-hidden="true" className={styles.iconbutton} />
             </Link>
             <Link href="/timeplan" className={styles.link}>
               <div className={styles.icon}>
-                <img src="/images/d7feaedb-62f8-4620-b658-25ab4a8b0b13.png" alt="" className={styles.person} />
+                <CalendarIcon aria-hidden="true" className={styles.person} />
               </div>
               <div className={styles.body}>
                 <div className={styles['text-full-width']}>
@@ -94,13 +95,13 @@ export default function HomePage() {
                   <Paragraph data-size="sm" variant="default" className={styles['nav-link-text']}>Din timeplan og vakter</Paragraph>
                 </div>
               </div>
-              <img src="/images/fb13b320-891d-404c-b50a-6df0238c774b.png" alt="" className={styles.iconbutton} />
+              <ChevronRightIcon aria-hidden="true" className={styles.iconbutton} />
             </Link>
           </div>
           <div className={styles['nav-links-row']}>
             <a href="#nyttig" className={styles.link}>
               <div className={styles.icon}>
-                <img src="/images/3b7ad995-9411-4ac2-90ab-dd4d52df78a3.png" alt="" className={styles.person} />
+                <MegaphoneSpeakingIcon aria-hidden="true" className={styles.person} />
               </div>
               <div className={styles.body}>
                 <div className={styles['text-full-width']}>
@@ -110,11 +111,11 @@ export default function HomePage() {
                   <Paragraph data-size="sm" variant="default" className={styles['nav-link-text']}>Nyttig informasjon</Paragraph>
                 </div>
               </div>
-              <img src="/images/8cf2a926-b234-46e9-a171-224741195def.png" alt="" className={styles.iconbutton} />
+              <ChevronRightIcon aria-hidden="true" className={styles.iconbutton} />
             </a>
             <a href="#tjenester" className={styles.link}>
               <div className={styles.icon}>
-                <img src="/images/f7922170-ec4e-4ded-8606-2577d2cb8b0c.png" alt="" className={styles.person} />
+                <BookIcon aria-hidden="true" className={styles.person} />
               </div>
               <div className={styles.body}>
                 <div className={styles['text-full-width']}>
@@ -124,7 +125,7 @@ export default function HomePage() {
                   <Paragraph data-size="sm" variant="default" className={styles['nav-link-text']}>Kurs og opplæring</Paragraph>
                 </div>
               </div>
-              <img src="/images/da6416c7-2628-4db6-b5d5-e338119a6bd9.png" alt="" className={styles.iconbutton} />
+              <ChevronRightIcon aria-hidden="true" className={styles.iconbutton} />
             </a>
           </div>
         </section>
@@ -200,7 +201,7 @@ export default function HomePage() {
                             style={{ textDecoration: 'none', cursor: 'pointer' }}
                           >
                             <p className={styles['service-link-underlined']}>{t.navn}</p>
-                            <img src="/images/f25a1ea0-53ca-4d44-a192-3aafbd0fd429.png" alt="Ekstern lenke" className={styles['external-link-icon']} />
+                            <ExternalLinkIcon aria-hidden="true" className={styles['external-link-icon']} />
                           </a>
                           <div className={styles['service-desc-wrapper']}>
                             <p className={styles['service-desc-text']}>{t.beskrivelse}</p>

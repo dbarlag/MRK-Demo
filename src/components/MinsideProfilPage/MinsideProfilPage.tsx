@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Avatar, Button, Divider, Heading, Paragraph } from 'rk-designsystem';
+import { PencilIcon, TrashIcon, PlusIcon, ExternalLinkIcon, UploadIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import MinsideTopSection from '../shared/MinsideTopSection';
@@ -210,7 +211,7 @@ export default function MinsideProfilPage() {
             <div className={styles['btn-wrapper']}>
               <Button loading={false} showIconRight showIconLeft={false} variant="primary" data-color="primary" className={styles['primary-btn']} onClick={() => setEditingProfile(true)}>
                 Endre
-                <img src="/images/afe096b2-3709-4688-a8d6-bb62c9fcf85c.png" alt="" className="btn-icon" />
+                <PencilIcon aria-hidden="true" style={{ width: "1em", height: "1em" }} />
               </Button>
             </div>
           </div>
@@ -226,7 +227,7 @@ export default function MinsideProfilPage() {
               <div className={styles['btn-wrapper']}>
                 <Button showIconRight loading={false} showIconLeft={false} variant="primary" data-color="neutral" className={styles['add-btn']} onClick={() => setAddingParorende(true)}>
                   Legge til
-                  <img src="/images/eefc83a6-9acc-43b7-81f8-2e4306b65ce1.png" alt="" className="btn-icon" />
+                  <PlusIcon aria-hidden="true" style={{ width: "1em", height: "1em" }} />
                 </Button>
               </div>
             </div>
@@ -259,13 +260,13 @@ export default function MinsideProfilPage() {
                   <div className={styles['btn-wrapper']}>
                     <Button loading={false} showIconRight showIconLeft={false} variant="primary" data-color="primary" className={styles['primary-btn']} onClick={() => setRemovingParorende(p)}>
                       Fjern
-                      <img src="/images/ef0a4ff0-b687-426e-9d71-4f3d211291d4.png" alt="" className="btn-icon" />
+                      <TrashIcon aria-hidden="true" style={{ width: "1em", height: "1em" }} />
                     </Button>
                   </div>
                   <div className={styles['btn-wrapper']}>
                     <Button loading={false} showIconRight showIconLeft={false} variant="primary" data-color="primary" className={styles['primary-btn']} onClick={() => setEditingParorende(p)}>
                       Endre
-                      <img src="/images/c6449fdd-3b12-46e9-b050-49b622814a2b.png" alt="" className="btn-icon" />
+                      <PencilIcon aria-hidden="true" style={{ width: "1em", height: "1em" }} />
                     </Button>
                   </div>
                 </div>
@@ -339,7 +340,10 @@ export default function MinsideProfilPage() {
                         }}
                       >
                         {e.type === 'politiattest' ? 'Laste opp' : 'Les'}
-                        <img src="/images/47ed3648-852e-440d-8c2b-12a774e39323.png" alt="" className="btn-icon" />
+                        {e.type === 'politiattest'
+                          ? <UploadIcon aria-hidden="true" style={{ width: "1em", height: "1em" }} />
+                          : <ExternalLinkIcon aria-hidden="true" style={{ width: "1em", height: "1em" }} />
+                        }
                       </Button>
                     </div>
                   </div>

@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button, Heading, Tabs } from 'rk-designsystem';
+import { ArrowLeftIcon, PersonIcon, HandShakeHeartIcon, BookIcon } from '@navikt/aksel-icons';
 
 interface MinsideTopSectionProps {
   activeTab: 'profil' | 'engasjement' | 'kompetanse';
@@ -31,7 +32,7 @@ export default function MinsideTopSection({ activeTab, styles }: MinsideTopSecti
         <div className={styles['btn-wrapper']}>
           <Link href="/" style={{ textDecoration: 'none' }}>
             <Button loading={false} showIconRight={false} showIconLeft variant="tertiary" data-color="neutral" className={styles['back-btn']}>
-              <img src="/images/13fca71f-16c5-4b74-ac1f-afc54143b162.png" alt="" className="btn-icon" />
+              <ArrowLeftIcon aria-hidden="true" style={{ width: '1em', height: '1em' }} />
               Tilbake
             </Button>
           </Link>
@@ -46,15 +47,15 @@ export default function MinsideTopSection({ activeTab, styles }: MinsideTopSecti
         <Tabs data-color="primary" value={activeTab} onChange={handleTabChange}>
           <Tabs.List>
             <Tabs.Tab value="profil">
-              <img src="/images/45e2ef49-f9a8-4ae7-9a75-ed57973e4c71.png" alt="" className="tab-icon" />
+              <PersonIcon aria-hidden="true" style={{ width: '1.2em', height: '1.2em', verticalAlign: 'middle', marginRight: '0.4em' }} />
               Profil
             </Tabs.Tab>
             <Tabs.Tab value="engasjement">
-              <img src="/images/9e6d9385-3f18-4bcd-96e1-e5d476de7b58.png" alt="" className="tab-icon" />
+              <HandShakeHeartIcon aria-hidden="true" style={{ width: '1.2em', height: '1.2em', verticalAlign: 'middle', marginRight: '0.4em' }} />
               Engasjement
             </Tabs.Tab>
             <Tabs.Tab value="kompetanse">
-              <img src="/images/64e69874-5dc6-4236-8409-11eb55e64d92.png" alt="" className="tab-icon" />
+              <BookIcon aria-hidden="true" style={{ width: '1.2em', height: '1.2em', verticalAlign: 'middle', marginRight: '0.4em' }} />
               Kompetanse
             </Tabs.Tab>
           </Tabs.List>
