@@ -37,10 +37,10 @@ export default function MinsideEngasjementPage() {
   const scrollStart = useRef(0);
 
   useEffect(() => {
-    fetchMedlemskap().then(setMedlemskap);
-    fetchAktiviteter().then(setAktiviteter);
-    fetchRoller().then(setRoller);
-    fetchVerv().then(setVerv);
+    fetchMedlemskap().then(setMedlemskap).catch(console.error);
+    fetchAktiviteter().then(setAktiviteter).catch(console.error);
+    fetchRoller().then(setRoller).catch(console.error);
+    fetchVerv().then(setVerv).catch(console.error);
   }, []);
 
   const onMouseDown = useCallback((e: React.MouseEvent) => {

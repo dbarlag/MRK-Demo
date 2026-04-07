@@ -15,11 +15,11 @@ export default function HomePage() {
   const [tjenester, setTjenester] = useState<TjenesteKategori[]>([]);
 
   useEffect(() => {
-    fetchProfile().then(setUser);
+    fetchProfile().then(setUser).catch(console.error);
     fetchDashboard().then((data) => {
       setNyttig(data.nyttig);
       setTjenester(data.tjenester);
-    });
+    }).catch(console.error);
   }, []);
 
   return (

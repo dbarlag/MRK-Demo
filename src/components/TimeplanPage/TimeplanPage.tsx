@@ -154,8 +154,8 @@ export default function TimeplanPage() {
   const [currentWeek, setCurrentWeek] = useState(1);
 
   useEffect(() => {
-    fetchTimeplan().then(setEvents);
-    fetchPameldinger().then(setPameldinger);
+    fetchTimeplan().then(setEvents).catch(console.error);
+    fetchPameldinger().then(setPameldinger).catch(console.error);
   }, []);
 
   const toggleFilter = (filter: FilterType) => {

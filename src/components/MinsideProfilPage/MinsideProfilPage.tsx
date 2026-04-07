@@ -109,9 +109,9 @@ export default function MinsideProfilPage() {
   const scrollStart = useRef(0);
 
   useEffect(() => {
-    fetchProfile().then(setUser);
-    fetchParorende().then(setParorende);
-    fetchErklaringer().then(setErklaringer);
+    fetchProfile().then(setUser).catch(console.error);
+    fetchParorende().then(setParorende).catch(console.error);
+    fetchErklaringer().then(setErklaringer).catch(console.error);
   }, []);
 
   const onMouseDown = useCallback((e: React.MouseEvent) => {

@@ -121,9 +121,9 @@ export default function MinsideKompetansePage() {
   const [editingSertifikater, setEditingSertifikater] = useState(false);
 
   useEffect(() => {
-    fetchKurser().then(setKurser);
-    fetchSprak().then(setSprak);
-    fetchSertifikater().then(setSertifikater);
+    fetchKurser().then(setKurser).catch(console.error);
+    fetchSprak().then(setSprak).catch(console.error);
+    fetchSertifikater().then(setSertifikater).catch(console.error);
   }, []);
 
   return (
