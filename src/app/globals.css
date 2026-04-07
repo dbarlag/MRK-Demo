@@ -15,3 +15,8 @@ body { margin: 0; padding: 0; }
   vertical-align: middle;
   margin-right: 0.4em;
 }
+
+/* Upscale secondary logo in Header */
+[class*="secondaryLogo_"] {
+  height: 40px !important;
+}
