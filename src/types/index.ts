@@ -38,6 +38,7 @@ export interface Medlemskap {
   startdato: string;
   sluttdato: string;
   type: string;
+  aktiv: boolean;
 }
 
 export interface Aktivitet {

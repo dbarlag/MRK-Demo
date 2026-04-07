@@ -8,7 +8,20 @@ export const mockMedlemskap: Medlemskap = {
   startdato: '05.05.2025',
   sluttdato: '05.05.2026',
   type: 'Voksen',
+  aktiv: true,
 };
+
+// Toggle this to test "Ikke Medlem" view:
+// export const mockMedlemskap: Medlemskap = {
+//   tittel: 'Ikke Medlem',
+//   status: 'Inaktiv',
+//   statusColor: 'warning',
+//   forening: 'Volda Røde Kors',
+//   startdato: '',
+//   sluttdato: '',
+//   type: '',
+//   aktiv: false,
+// };
 
 export const mockAktiviteter: Aktivitet[] = [
   {

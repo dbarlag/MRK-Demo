@@ -1,7 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Button, Divider, Heading } from 'rk-designsystem';
+import { Button, Divider, Heading, Paragraph, Tag } from 'rk-designsystem';
+import { ArrowRightIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import MinsideTopSection from '../shared/MinsideTopSection';
@@ -22,6 +23,58 @@ function SectionHeader({ title }: { title: string }) {
         <Divider />
       </div>
     </div>
+  );
+}
+
+function IkkeMedlemCard({ forening, styles: s }: { forening: string; styles: Record<string, string> }) {
+  const [valg, setValg] = useState<'medlemskap' | 'familie'>('medlemskap');
+
+  return (
+    <article className={s['activity-card']}>
+      <div className={s['card-top']}>
+        <div className={s['heading-fill']}>
+          <Heading data-size="xs" level={4}>Ikke Medlem</Heading>
+        </div>
+        <div className={s['tag-wrapper']}>
+          <Tag tagLabel="Inaktiv" data-color="warning" className={s['status-tag']}>Inaktiv</Tag>
+        </div>
+      </div>
+      <div className={s.footer}>
+        <div className={s.line1} style={{ gap: '10px' }}>
+          <Paragraph data-size="sm" variant="default" style={{ fontWeight: 600 }}>Førening</Paragraph>
+          <Paragraph data-size="sm" variant="default">{forening}</Paragraph>
+        </div>
+        <Paragraph data-size="sm" variant="default">
+          Som medlem støtter du vårt humanitære arbeid gjennom medlemskontingenten.
+          Du får også stemmerett på lokalforeningens årsmøte og kan være med å sette retning for det humanitære arbeidet.
+        </Paragraph>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--ds-size-2)', cursor: 'pointer' }}>
+          <input type="radio" name="medlemskap" checked={valg === 'medlemskap'} onChange={() => setValg('medlemskap')} />
+          <Paragraph data-size="sm" variant="default">Medlemskap (300 kr pr. år)</Paragraph>
+        </label>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--ds-size-2)', cursor: 'pointer' }}>
+          <input type="radio" name="medlemskap" checked={valg === 'familie'} onChange={() => setValg('familie')} />
+          <Paragraph data-size="sm" variant="default">Familiemedlemskap (600 kr pr. år)</Paragraph>
+        </label>
+        <Paragraph data-size="sm" variant="default">
+          Du vil motta giro, AvtaleGiro, blankett og medlemskort i posten kort tid etter innmelding.
+        </Paragraph>
+        <div>
+          <Paragraph data-size="sm" variant="default" style={{ fontWeight: 700 }}>Spørsmål om medlemskap?</Paragraph>
+          <Paragraph data-size="sm" variant="default">
+            Ta gjerne kontakt med oss på{' '}
+            <a href="mailto:medlem@redcross.no" style={{ color: 'inherit' }}>medlem@redcross.no</a>
+          </Paragraph>
+        </div>
+        <Divider />
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button loading={false} showIconRight showIconLeft={false} variant="primary" data-color="primary" className={s['primary-btn']}>
+            Bli medlem
+            <ArrowRightIcon aria-hidden="true" style={{ width: '1em', height: '1em' }} />
+          </Button>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -72,18 +125,22 @@ export default function MinsideEngasjementPage() {
         {medlemskap && (
           <section className={styles.footer}>
             <SectionHeader title="Medlemskap" />
-            <ActivityCard
-              title={medlemskap.tittel}
-              tagLabel={medlemskap.status}
-              tagColor={medlemskap.statusColor}
-              rows={[
-                { label: 'Førening', value: medlemskap.forening },
-                { label: 'Startdato:', value: medlemskap.startdato },
-                { label: 'Sluttdato', value: medlemskap.sluttdato, valueColor: 'success' },
-                { label: 'Type: ', value: medlemskap.type },
-              ]}
-              styles={styles}
-            />
+            {medlemskap.aktiv ? (
+              <ActivityCard
+                title={medlemskap.tittel}
+                tagLabel={medlemskap.status}
+                tagColor={medlemskap.statusColor}
+                rows={[
+                  { label: 'Førening', value: medlemskap.forening },
+                  { label: 'Startdato:', value: medlemskap.startdato },
+                  { label: 'Sluttdato', value: medlemskap.sluttdato, valueColor: 'success' },
+                  { label: 'Type: ', value: medlemskap.type },
+                ]}
+                styles={styles}
+              />
+            ) : (
+              <IkkeMedlemCard forening={medlemskap.forening} styles={styles} />
+            )}
           </section>
         )}
 
