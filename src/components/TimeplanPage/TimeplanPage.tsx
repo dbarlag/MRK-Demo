@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button, Heading, Pagination, Paragraph, Tabs, usePagination } from 'rk-designsystem';
 import SiteHeader from '../shared/SiteHeader';
 import LoadingSpinner from '../shared/LoadingSpinner';
-import { fetchTimeplan } from '@/lib/api';
+import { fetchTimeplan, fetchPameldinger } from '@/lib/api';
 import type { TimeplanEvent } from '@/types';
 import styles from './TimeplanPage.module.css';
 
@@ -148,12 +148,14 @@ function WeekPagination({ currentWeek, totalWeeks, onChangeWeek }: {
 
 export default function TimeplanPage() {
   const [events, setEvents] = useState<TimeplanEvent[]>([]);
+  const [pameldinger, setPameldinger] = useState<TimeplanEvent[]>([]);
   const [activeTab, setActiveTab] = useState<'kommende' | 'mine-påmeldinger'>('kommende');
   const [activeFilters, setActiveFilters] = useState<Set<FilterType>>(new Set(ALL_FILTERS));
   const [currentWeek, setCurrentWeek] = useState(1);
 
   useEffect(() => {
     fetchTimeplan().then(setEvents);
+    fetchPameldinger().then(setPameldinger);
   }, []);
 
   const toggleFilter = (filter: FilterType) => {
@@ -172,7 +174,7 @@ export default function TimeplanPage() {
   const totalWeeks = Math.max(1, Math.ceil(filteredEvents.length / EVENTS_PER_WEEK));
   const startIdx = (currentWeek - 1) * EVENTS_PER_WEEK;
   const pagedEvents = filteredEvents.slice(startIdx, startIdx + EVENTS_PER_WEEK);
-  const displayEvents = activeTab === 'kommende' ? pagedEvents : [];
+  const displayEvents = activeTab === 'kommende' ? pagedEvents : pameldinger;
 
   return (
     <div className={styles.timeplan}>
