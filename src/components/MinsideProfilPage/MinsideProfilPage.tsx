@@ -303,7 +303,7 @@ export default function MinsideProfilPage() {
               onMouseLeave={onMouseUp}
             >
               {erklaringer.map((e) => (
-                <article key={e.id} className={e.type === 'politiattest' ? styles['section-me'] : styles.card}>
+                <article key={e.id} className={styles.card}>
                   <div className={styles.user}>
                     <div className={styles.data}>
                       <div className={styles['info-heading-wrapper']}>
