@@ -10,7 +10,7 @@ export const mockUser: UserProfile = {
   phone: '+47 47 12 12 12',
   address: 'Solveien 45c, 1256 Oslo',
   forening: 'Volda Røde Kors',
-  avatarInitial: 'F',
+  avatarInitial: 'ON',
 };
 
 export const mockParorende: Parorende[] = [
