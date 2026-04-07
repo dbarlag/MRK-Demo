@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { Paragraph } from 'rk-designsystem';
 
 interface InfoRowProps {
@@ -14,7 +15,7 @@ interface InfoRowProps {
   valueColorClass?: string;
 }
 
-export default function InfoRow({
+export default memo(function InfoRow({
   label,
   value,
   iconSrc,
@@ -43,4 +44,4 @@ export default function InfoRow({
       </div>
     </div>
   );
-}
+});

@@ -131,7 +131,15 @@ export default function MinsideProfilPage() {
     isDragging.current = false;
   }, []);
 
-  if (!user) return <LoadingSpinner />;
+  if (!user) return (
+    <div className={styles['profil-page']}>
+      <div className={styles.wrapper}><SiteHeader /></div>
+      <div className={styles['page-body']}>
+        <MinsideTopSection activeTab="profil" styles={styles} />
+        <LoadingSpinner />
+      </div>
+    </div>
+  );
 
   const handleSaveProfile = (values: Record<string, string>) => {
     setUser((prev) => prev ? { ...prev, phone: values.phone, email: values.email, address: values.address } : prev);

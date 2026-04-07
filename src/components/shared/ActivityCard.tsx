@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { Heading, Tag } from 'rk-designsystem';
 import InfoRow from './InfoRow';
 
@@ -18,7 +19,7 @@ interface ActivityCardProps {
   styles: Record<string, string>;
 }
 
-export default function ActivityCard({ title, tagLabel, tagColor, rows, styles }: ActivityCardProps) {
+export default memo(function ActivityCard({ title, tagLabel, tagColor, rows, styles }: ActivityCardProps) {
   return (
     <article className={styles['activity-card']}>
       <div className={styles['card-top']}>
@@ -36,4 +37,4 @@ export default function ActivityCard({ title, tagLabel, tagColor, rows, styles }
       </div>
     </article>
   );
-}
+});
