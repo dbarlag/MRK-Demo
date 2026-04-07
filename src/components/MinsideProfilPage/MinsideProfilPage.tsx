@@ -199,16 +199,16 @@ export default function MinsideProfilPage() {
               <section className={styles.sections}>
                 <section className={styles.section1}>
                   <div className={styles.element}>
-                    <InfoRow label="Fødselsdato:" value={user.birthDate} iconSrc="/images/e70ca5a3-092e-4273-93c0-a5f310027c2f.png" {...profilRowProps} />
-                    <InfoRow label="Røde Kors e-post:" value={user.rkEmail} iconSrc="/images/ccb59b7f-1e71-4cee-b012-23975a2f5284.png" {...profilRowProps} />
-                    <InfoRow label="Røde Kors nr.: " value={user.rkNr} iconSrc="/images/cb335e29-eb06-44dd-9846-27907bc77d47.png" {...profilRowProps} />
+                    <InfoRow label="Fødselsdato:" value={user.birthDate} iconSrc={assetPath("/images/e70ca5a3-092e-4273-93c0-a5f310027c2f.png")} {...profilRowProps} />
+                    <InfoRow label="Røde Kors e-post:" value={user.rkEmail} iconSrc={assetPath("/images/ccb59b7f-1e71-4cee-b012-23975a2f5284.png")} {...profilRowProps} />
+                    <InfoRow label="Røde Kors nr.: " value={user.rkNr} iconSrc={assetPath("/images/cb335e29-eb06-44dd-9846-27907bc77d47.png")} {...profilRowProps} />
                   </div>
                 </section>
                 <section className={styles.section1}>
                   <div className={styles.element}>
-                    <InfoRow label="Tel. nummer:" value={user.phone} iconSrc="/images/cd82a362-7c7a-421b-9cfc-b25c601d54d6.png" {...profilRowProps} />
-                    <InfoRow label="E-post:" value={user.email} iconSrc="/images/629c164c-9efb-4e21-8ba4-5c1251d9cc56.png" {...profilRowProps} />
-                    <InfoRow label="Address: " value={user.address} iconSrc="/images/40d5c8f0-2f36-4c5e-96a2-e0d7086a2efb.png" {...profilRowProps} />
+                    <InfoRow label="Tel. nummer:" value={user.phone} iconSrc={assetPath("/images/cd82a362-7c7a-421b-9cfc-b25c601d54d6.png")} {...profilRowProps} />
+                    <InfoRow label="E-post:" value={user.email} iconSrc={assetPath("/images/629c164c-9efb-4e21-8ba4-5c1251d9cc56.png")} {...profilRowProps} />
+                    <InfoRow label="Address: " value={user.address} iconSrc={assetPath("/images/40d5c8f0-2f36-4c5e-96a2-e0d7086a2efb.png")} {...profilRowProps} />
                   </div>
                 </section>
               </section>
