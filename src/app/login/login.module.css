@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--ds-color-neutral-background-subtle);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-size-4);
+  padding: var(--ds-size-10);
+  background: var(--ds-color-neutral-background-default);
+  border-radius: var(--ds-size-2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+  width: 100%;
+}
+
+.logo {
+  height: 64px;
+  width: auto;
+}
+
+.heading {
+  text-align: center;
+}
+
+.description {
+  text-align: center;
+  color: var(--ds-color-neutral-text-subtle);
+}
+
+.button {
+  width: 100%;
+  margin-top: var(--ds-size-2);
+}

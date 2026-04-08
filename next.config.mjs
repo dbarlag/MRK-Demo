@@ -9,6 +9,8 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_BASE_PATH: isGHPages ? '/MRK-Demo' : '',
   },
+  // Ensure environment variables are available
+  serverExternalPackages: [],
 };
 
 export default nextConfig;

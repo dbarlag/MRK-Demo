@@ -3,6 +3,7 @@ import 'rk-design-tokens/design-tokens-build/theme.css';
 import 'rk-designsystem/dist/rk-designsystem.css';
 import './globals.css';
 import { Source_Sans_3 } from 'next/font/google';
+import AuthProvider from '@/components/shared/AuthProvider';
 
 const sourceSans3 = Source_Sans_3({
   subsets: ['latin'],
@@ -20,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="no">
       <body className={sourceSans3.className}>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
