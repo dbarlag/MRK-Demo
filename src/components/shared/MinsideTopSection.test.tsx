@@ -2,6 +2,9 @@ import { render, screen } from '@testing-library/react';
 import MinsideTopSection from './MinsideTopSection';
 
 jest.mock('rk-designsystem');
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({ push: jest.fn() }),
+}));
 
 const mockStyles: Record<string, string> = new Proxy({}, {
   get: (_target, prop) => String(prop),

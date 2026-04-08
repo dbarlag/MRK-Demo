@@ -5,7 +5,8 @@ import { mockEvents, mockPameldinger } from '@/data/mockTimeplan';
 import { mockNyttigKort, mockTjenester } from '@/data/mockDashboard';
 import type { UserProfile, Parorende, Erklering, Medlemskap, Aktivitet, Rolle, Verv, Kurs, Sprak, Sertifikat, TimeplanEvent, NyttigKort, TjenesteKategori } from '@/types';
 
-const isStatic = typeof window !== 'undefined' && !window.location.port;
+// GitHub Pages static export: no API routes available, use mock data directly
+const isStatic = typeof window !== 'undefined' && (window as any).__NEXT_DATA__?.basePath === '/MRK-Demo';
 
 async function get<T>(path: string, fallback: T): Promise<T> {
   if (isStatic) return fallback;
