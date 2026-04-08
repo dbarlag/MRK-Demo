@@ -24,6 +24,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci --legacy-peer-deps
+      # Remove API routes and middleware — not needed for static demo site
+      - run: rm -rf src/app/api src/middleware.ts
       - run: GITHUB_PAGES=true npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

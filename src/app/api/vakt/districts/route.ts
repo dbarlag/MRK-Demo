@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { vakt } from '@/lib/vakt-client';
-import { getSession } from '@/lib/auth';
+import { requireAuth } from '@/lib/api-auth';
 
 const METHOD_MAP: Record<string, keyof typeof vakt> = {
   'districts': 'districts',
@@ -13,8 +13,8 @@ const METHOD_MAP: Record<string, keyof typeof vakt> = {
 };
 
 export async function GET(req: NextRequest) {
-  const session = await getSession();
-  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const denied = await requireAuth();
+  if (denied) return denied;
   try {
     const params: Record<string, string> = {};
     req.nextUrl.searchParams.forEach((v, k) => { params[k] = v; });
