@@ -139,7 +139,11 @@ export default function MinsideKompetansePage() {
         <section className={styles['section-membership']}>
           <SectionHeader title="Kurser" />
           <div className={styles['activity-gallery']}>
-            {kurser.map((k) => (
+            {kurser.length === 0 ? (
+              <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
+                Ingen kurser registrert.
+              </Paragraph>
+            ) : kurser.map((k) => (
               <ActivityCard
                 key={k.id}
                 title={k.tittel}
@@ -161,7 +165,11 @@ export default function MinsideKompetansePage() {
           <SectionHeader title="Språker" />
           <article className={styles['detail-card']}>
             <div className={styles.body}>
-              {sprak.map((s, i) => (
+              {sprak.length === 0 ? (
+                <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
+                  Ingen språk registrert.
+                </Paragraph>
+              ) : sprak.map((s, i) => (
                 <InfoRow key={i} label={`${s.sprak}:`} value={s.niva} styles={styles} />
               ))}
             </div>
@@ -186,7 +194,11 @@ export default function MinsideKompetansePage() {
           <SectionHeader title="Sertifikater" />
           <article className={styles['detail-card']}>
             <div className={styles.body}>
-              {sertifikater.map((s, i) => (
+              {sertifikater.length === 0 ? (
+                <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
+                  Ingen sertifikater registrert.
+                </Paragraph>
+              ) : sertifikater.map((s, i) => (
                 <InfoRow key={i} label={`${s.type}:`} value={s.klasse} styles={styles} />
               ))}
             </div>

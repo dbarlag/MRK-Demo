@@ -1,11 +1,21 @@
-import { mockUser, mockParorende, mockErklaringer } from '@/data/mockUser';
-import { mockMedlemskap, mockAktiviteter, mockRoller, mockVerv } from '@/data/mockEngagement';
-import { mockKurser, mockSprak, mockSertifikater } from '@/data/mockCompetence';
-import { mockEvents, mockPameldinger } from '@/data/mockTimeplan';
-import { mockNyttigKort, mockTjenester } from '@/data/mockDashboard';
-import type { UserProfile, Parorende, Erklering, Medlemskap, Aktivitet, Rolle, Verv, Kurs, Sprak, Sertifikat, TimeplanEvent, NyttigKort, TjenesteKategori } from '@/types';
+import type {
+  UserProfile,
+  Parorende,
+  Erklering,
+  Medlemskap,
+  Aktivitet,
+  Rolle,
+  Verv,
+  Kurs,
+  Sprak,
+  Sertifikat,
+  TimeplanEvent,
+  NyttigKort,
+  TjenesteKategori,
+} from '@/types';
 
-// GitHub Pages static export: no API routes available, use mock data directly
+// GitHub Pages static export: no API routes available. Fallback is empty so the
+// UI shows proper empty states instead of stale mock data.
 const isStatic = typeof window !== 'undefined' && (window as any).__NEXT_DATA__?.basePath === '/MRK-Demo';
 
 async function get<T>(path: string, fallback: T): Promise<T> {
@@ -19,28 +29,42 @@ async function get<T>(path: string, fallback: T): Promise<T> {
   }
 }
 
+const PLACEHOLDER = 'Ikke registrert';
+const EMPTY_PROFILE: UserProfile = {
+  id: '',
+  name: PLACEHOLDER,
+  avatarInitial: '',
+  rkEmail: PLACEHOLDER,
+  email: PLACEHOLDER,
+  rkNr: PLACEHOLDER,
+  phone: PLACEHOLDER,
+  birthDate: PLACEHOLDER,
+  address: PLACEHOLDER,
+  forening: PLACEHOLDER,
+};
+
 // User
-export const fetchProfile = () => get<UserProfile>('/user/profile', mockUser);
-export const fetchParorende = () => get<Parorende[]>('/user/parorende', mockParorende);
-export const fetchErklaringer = () => get<Erklering[]>('/user/erklaringer', mockErklaringer);
+export const fetchProfile = () => get<UserProfile>('/user/profile', EMPTY_PROFILE);
+export const fetchParorende = () => get<Parorende[]>('/user/parorende', []);
+export const fetchErklaringer = () => get<Erklering[]>('/user/erklaringer', []);
 
 // Engagement
-export const fetchMedlemskap = () => get<Medlemskap>('/user/medlemskap', mockMedlemskap);
-export const fetchAktiviteter = () => get<Aktivitet[]>('/user/aktiviteter', mockAktiviteter);
-export const fetchRoller = () => get<Rolle[]>('/user/roller', mockRoller);
-export const fetchVerv = () => get<Verv[]>('/user/verv', mockVerv);
+export const fetchMedlemskap = () => get<Medlemskap | null>('/user/medlemskap', null);
+export const fetchAktiviteter = () => get<Aktivitet[]>('/user/aktiviteter', []);
+export const fetchRoller = () => get<Rolle[]>('/user/roller', []);
+export const fetchVerv = () => get<Verv[]>('/user/verv', []);
 
 // Competence
-export const fetchKurser = () => get<Kurs[]>('/user/kurser', mockKurser);
-export const fetchSprak = () => get<Sprak[]>('/user/spraker', mockSprak);
-export const fetchSertifikater = () => get<Sertifikat[]>('/user/sertifikater', mockSertifikater);
+export const fetchKurser = () => get<Kurs[]>('/user/kurser', []);
+export const fetchSprak = () => get<Sprak[]>('/user/spraker', []);
+export const fetchSertifikater = () => get<Sertifikat[]>('/user/sertifikater', []);
 
 // Timeplan
-export const fetchTimeplan = () => get<TimeplanEvent[]>('/timeplan', mockEvents);
-export const fetchPameldinger = () => get<TimeplanEvent[]>('/pameldinger', mockPameldinger);
+export const fetchTimeplan = () => get<TimeplanEvent[]>('/timeplan', []);
+export const fetchPameldinger = () => get<TimeplanEvent[]>('/pameldinger', []);
 
 // Dashboard
 export const fetchDashboard = () => get<{ nyttig: NyttigKort[]; tjenester: TjenesteKategori[] }>(
   '/dashboard',
-  { nyttig: mockNyttigKort, tjenester: mockTjenester }
+  { nyttig: [], tjenester: [] },
 );

@@ -246,7 +246,11 @@ export default function MinsideProfilPage() {
             </div>
           </div>
           <div className={styles.gallery}>
-            {parorende.map((p) => (
+            {parorende.length === 0 ? (
+              <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
+                Ingen pårørende registrert.
+              </Paragraph>
+            ) : parorende.map((p) => (
               <article key={p.id} className={styles['parent-card']}>
                 <div className={styles.user}>
                   <div className={styles.data}>
@@ -304,7 +308,11 @@ export default function MinsideProfilPage() {
               onMouseUp={onMouseUp}
               onMouseLeave={onMouseUp}
             >
-              {erklaringer.map((e) => (
+              {erklaringer.length === 0 ? (
+                <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
+                  Ingen erklæringer registrert.
+                </Paragraph>
+              ) : erklaringer.map((e) => (
                 <article key={e.id} className={styles.card}>
                   <div className={styles.user}>
                     <div className={styles.data}>

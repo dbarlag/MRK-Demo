@@ -1,28 +1,11 @@
 import { NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/api-auth';
-import { vakt } from '@/lib/vakt-client';
-import type { Rolle } from '@/types';
 
 export async function GET() {
   const denied = await requireAuth();
   if (denied) return denied;
 
-  try {
-    const res = await vakt.roles();
-
-    const roller: Rolle[] = res.data.map((r) => ({
-      id: r.id,
-      tittel: r.name,
-      status: 'Pågående',
-      statusColor: 'success',
-      forening: 'Oslo Røde Kors',
-      startdato: '',
-      sluttdato: 'pågående',
-    }));
-
-    return NextResponse.json(roller);
-  } catch {
-    const { mockRoller } = await import('@/data/mockEngagement');
-    return NextResponse.json(mockRoller);
-  }
+  // Vakt /roles returns role definitions (Administrator/Volunteer/etc.), not
+  // the user's assigned roles. Empty until backend exposes a user-scoped endpoint.
+  return NextResponse.json([]);
 }

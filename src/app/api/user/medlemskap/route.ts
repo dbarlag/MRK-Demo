@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/api-auth';
-import { mockMedlemskap } from '@/data/mockEngagement';
 
 export async function GET() {
   const denied = await requireAuth();
   if (denied) return denied;
 
-  return NextResponse.json(mockMedlemskap);
+  // Vakt API does not expose user membership — null until backend extends scope
+  return NextResponse.json(null);
 }
