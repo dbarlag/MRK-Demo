@@ -14,9 +14,25 @@ export async function GET() {
 
   if (!oktaId) return NextResponse.json(mockUser);
 
+  const oktaName = session?.user?.name || mockUser.name;
+  const oktaEmail = session?.user?.email || mockUser.email;
+  const oktaInitials = oktaName
+    .split(/\s+/)
+    .map((n) => n[0] ?? '')
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+  const oktaFallback = {
+    ...mockUser,
+    id: oktaId,
+    name: oktaName,
+    email: oktaEmail,
+    avatarInitial: oktaInitials || mockUser.avatarInitial,
+  };
+
   try {
     const vaktUser = await getUserByOktaId(oktaId);
-    if (!vaktUser) return NextResponse.json(mockUser);
+    if (!vaktUser) return NextResponse.json(oktaFallback);
 
     const fullName = `${vaktUser.first_name} ${vaktUser.last_name}`.trim();
     const initials = `${vaktUser.first_name[0] ?? ''}${vaktUser.last_name[0] ?? ''}`.toUpperCase();
@@ -37,6 +53,6 @@ export async function GET() {
 
     return NextResponse.json(profile);
   } catch {
-    return NextResponse.json(mockUser);
+    return NextResponse.json(oktaFallback);
   }
 }
