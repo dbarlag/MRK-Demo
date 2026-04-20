@@ -1,4 +1,4 @@
-// Types matching the vakt.rodekors.no Statistics v1 API
+// Types matching the frivillig.rodekors.no API (prefix: main, v1)
 
 export interface PaginatedResponse<T> {
   data: T[];
@@ -121,6 +121,26 @@ export interface VaktShift {
 export interface VaktRole {
   id: string;
   name: string;
+}
+
+export interface VaktUser {
+  id: string;
+  okta_id: string | null;
+  active: boolean;
+  username: string;
+  relation_number: string;
+  first_name: string;
+  last_name: string;
+  email: string | null;
+  phone_number: string | null;
+  about: string | null;
+  locale: string;
+  last_active_at: string | null;
+  informed_at: string | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+  pruned_at: string | null;
 }
 
 export interface VaktChange {
