@@ -663,8 +663,9 @@
 
 .page-body {
   width: 100%;
+  max-width: 1411px;
+  margin: 0 auto;
   height: auto;
-  align-self: stretch;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -678,8 +679,6 @@
 
 .timeplan {
   width: 100%;
-  max-width: 1411px;
-  margin: 0 auto;
   height: auto;
   display: flex;
   flex-direction: column;

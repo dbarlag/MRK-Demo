@@ -34,5 +34,5 @@
 .activity-gallery:active { cursor: grabbing; }
 .section-activities { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-4); align-items: center; }
 .roller-gallery { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: var(--ds-size-4); align-items: center; overflow: hidden; }
-.page-body { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-4); align-items: center; box-sizing: border-box; padding-left: var(--ds-size-30); padding-right: var(--ds-size-30); padding-top: var(--ds-size-8); padding-bottom: var(--ds-size-8); }
-.engasjement-page { width: 100%; max-width: 1440px; margin: 0 auto; height: auto; display: flex; flex-direction: column; align-items: center; background-color: var(--ds-color-primary-color-red-background-tinted); }
+.page-body { width: 100%; max-width: 1440px; margin: 0 auto; height: auto; display: flex; flex-direction: column; gap: var(--ds-size-4); align-items: center; box-sizing: border-box; padding-left: var(--ds-size-30); padding-right: var(--ds-size-30); padding-top: var(--ds-size-8); padding-bottom: var(--ds-size-8); }
+.engasjement-page { width: 100%; height: auto; display: flex; flex-direction: column; align-items: center; background-color: var(--ds-color-primary-color-red-background-tinted); }

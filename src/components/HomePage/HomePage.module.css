@@ -510,8 +510,9 @@
 
 .main-content {
   width: 100%;
+  max-width: 1411px;
+  margin: 0 auto;
   height: auto;
-  align-self: stretch;
   display: flex;
   flex-direction: column;
   gap: var(--ds-size-2);
@@ -525,8 +526,6 @@
 
 .home {
   width: 100%;
-  max-width: 1411px;
-  margin: 0 auto;
   height: auto;
   display: flex;
   flex-direction: column;
