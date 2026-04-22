@@ -6,21 +6,16 @@ import { Button, Card, CardBlock, Divider, Heading, Paragraph } from 'rk-designs
 import { PersonIcon, CalendarIcon, MegaphoneSpeakingIcon, BookIcon, ChevronRightIcon, ExternalLinkIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
 import LoadingSpinner from '../shared/LoadingSpinner';
-import { fetchProfile, fetchDashboard } from '@/lib/api';
-import type { UserProfile, NyttigKort, TjenesteKategori } from '@/types';
+import { assetPath } from '@/lib/basePath';
+import { fetchProfile } from '@/lib/api';
+import type { UserProfile } from '@/types';
 import styles from './HomePage.module.css';
 
 export default function HomePage() {
   const [user, setUser] = useState<UserProfile | null>(null);
-  const [nyttig, setNyttig] = useState<NyttigKort[]>([]);
-  const [tjenester, setTjenester] = useState<TjenesteKategori[]>([]);
 
   useEffect(() => {
     fetchProfile().then(setUser).catch(console.error);
-    fetchDashboard().then((data) => {
-      setNyttig(data.nyttig);
-      setTjenester(data.tjenester);
-    }).catch(console.error);
   }, []);
 
   return (
@@ -141,36 +136,62 @@ export default function HomePage() {
             </div>
           </div>
           <div className={styles['cards-row']}>
-            {nyttig.map((kort) => (
-              <div key={kort.id} className={styles['card-col']}>
-                <Card variant="default" data-color="neutral" className={styles['nyttig-card']}>
-                  <img src={kort.bildeSrc} alt="" className={styles.image} />
-                  <CardBlock>
-                    <div className={styles.container}>
-                      <div className={styles.header}>
-                        <div className={styles.content}>
-                          <div className={styles['header-and-subtitle']}>
-                            <div className={styles['text-full-width']}>
-                              <Paragraph data-size="sm" variant="default">{kort.subtittel}</Paragraph>
-                            </div>
-                            <header className={styles['header-container']}>
-                              <div className={styles['card-text-fill']}>
-                                <Heading data-size="md" level={3} className={styles['card-title']}>{kort.tittel}</Heading>
-                              </div>
-                            </header>
+            <div className={styles['card-col']}>
+              <Card variant="default" data-color="neutral" className={styles['nyttig-card']}>
+                <img src={assetPath('/images/8e25fd9d-f245-434d-87f5-a15ffcd09fc9.png')} alt="" className={styles.image} />
+                <CardBlock>
+                  <div className={styles.container}>
+                    <div className={styles.header}>
+                      <div className={styles.content}>
+                        <div className={styles['header-and-subtitle']}>
+                          <div className={styles['text-full-width']}>
+                            <Paragraph data-size="sm" variant="default">Subtitle top</Paragraph>
                           </div>
-                        </div>
-                      </div>
-                      <div className={styles['card-body']}>
-                        <div className={styles['text-full-width']}>
-                          <Paragraph data-size="md" variant="default">{kort.beskrivelse}</Paragraph>
+                          <header className={styles['header-container']}>
+                            <div className={styles['card-text-fill']}>
+                              <Heading data-size="md" level={3} className={styles['card-title']}>Card title</Heading>
+                            </div>
+                          </header>
                         </div>
                       </div>
                     </div>
-                  </CardBlock>
-                </Card>
-              </div>
-            ))}
+                    <div className={styles['card-body']}>
+                      <div className={styles['text-full-width']}>
+                        <Paragraph data-size="md" variant="default">Most provide as with carried business are much better more the perfected designer. Writing slightly explain desk unable at supposedly about this</Paragraph>
+                      </div>
+                    </div>
+                  </div>
+                </CardBlock>
+              </Card>
+            </div>
+            <div className={styles['card-col']}>
+              <Card variant="default" data-color="neutral" className={styles['nyttig-card']}>
+                <img src={assetPath('/images/ba7aa2ee-bef2-4156-8589-44d097ed683c.png')} alt="" className={styles.image} />
+                <CardBlock>
+                  <div className={styles.container}>
+                    <div className={styles.header}>
+                      <div className={styles.content}>
+                        <div className={styles['header-and-subtitle']}>
+                          <div className={styles['text-full-width']}>
+                            <Paragraph data-size="sm" variant="default">Subtitle top</Paragraph>
+                          </div>
+                          <header className={styles['header-container']}>
+                            <div className={styles['card-text-fill']}>
+                              <Heading data-size="md" level={3} className={styles['card-title']}>Card title</Heading>
+                            </div>
+                          </header>
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles['card-body']}>
+                      <div className={styles['text-full-width']}>
+                        <Paragraph data-size="md" variant="default">Most provide as with carried business are much better more the perfected designer. Writing slightly explain desk unable at supposedly about this</Paragraph>
+                      </div>
+                    </div>
+                  </div>
+                </CardBlock>
+              </Card>
+            </div>
           </div>
         </section>
 
@@ -185,34 +206,89 @@ export default function HomePage() {
             </div>
           </div>
           <section className={styles['cards-row']}>
-            {Array.from({ length: Math.ceil(tjenester.length / 2) }, (_, i) => (
-              <article key={i} className={styles['service-card']}>
-                <div className={styles['service-groups-col']}>
-                  {tjenester.slice(i * 2, i * 2 + 2).map((kat) => (
-                    <div key={kat.kategori} className={styles['service-group']}>
-                      <p className={styles['service-category-title']}>{kat.kategori}</p>
-                      {kat.tjenester.map((t) => (
-                        <div key={t.navn}>
-                          <a
-                            href={t.url || '#'}
-                            target={t.url ? '_blank' : undefined}
-                            rel={t.url ? 'noopener noreferrer' : undefined}
-                            className={styles['external-link-row']}
-                            style={{ textDecoration: 'none', cursor: 'pointer' }}
-                          >
-                            <p className={styles['service-link-underlined']}>{t.navn}</p>
-                            <ExternalLinkIcon aria-hidden="true" className={styles['external-link-icon']} />
-                          </a>
-                          <div className={styles['service-desc-wrapper']}>
-                            <p className={styles['service-desc-text']}>{t.beskrivelse}</p>
-                          </div>
-                        </div>
-                      ))}
+            <article className={styles['service-card']}>
+              <div className={styles['service-groups-col']}>
+                <div className={styles['service-group']}>
+                  <p className={styles['service-category-title']}>Administrasjon</p>
+                  <div>
+                    <a href="https://korsveien.rodekors.no" target="_blank" rel="noopener noreferrer" className={styles['external-link-row']} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                      <p className={styles['service-link-underlined']}>Korsveien</p>
+                      <ExternalLinkIcon aria-hidden="true" className={styles['external-link-icon']} />
+                    </a>
+                    <div className={styles['service-desc-wrapper']}>
+                      <p className={styles['service-desc-text']}>Intranett / Sharepoint / Office 360.</p>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </article>
-            ))}
+                <div className={styles['service-group']}>
+                  <p className={styles['service-category-title']}>Planlegging og rapportering</p>
+                  <div>
+                    <a href="https://kova.rodekors.no" target="_blank" rel="noopener noreferrer" className={styles['external-link-row']} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                      <p className={styles['service-link-underlined']}>Kova</p>
+                      <ExternalLinkIcon aria-hidden="true" className={styles['external-link-icon']} />
+                    </a>
+                    <div className={styles['service-desc-wrapper']}>
+                      <p className={styles['service-desc-text']}>Vaktplanlegging og påmelding.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <a href="https://rodekors.no" target="_blank" rel="noopener noreferrer" className={styles['external-link-row']} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                      <p className={styles['service-link-underlined']}>ID-kort for Hjelpekorpset</p>
+                      <ExternalLinkIcon aria-hidden="true" className={styles['external-link-icon']} />
+                    </a>
+                    <div className={styles['service-desc-wrapper']}>
+                      <p className={styles['service-desc-text']}>Bestilling av ID-kort.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <a href="https://rodekors.no" target="_blank" rel="noopener noreferrer" className={styles['external-link-row']} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                      <p className={styles['service-link-underlined']}>Bestill reise</p>
+                      <ExternalLinkIcon aria-hidden="true" className={styles['external-link-icon']} />
+                    </a>
+                    <div className={styles['service-desc-wrapper']}>
+                      <p className={styles['service-desc-text']}>Informasjon om bestilling av reiser som frivillig.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article className={styles['service-card']}>
+              <div className={styles['service-groups-col']}>
+                <div className={styles['service-group']}>
+                  <p className={styles['service-category-title']}>Varsling</p>
+                  <div>
+                    <a href="https://rodekors.no" target="_blank" rel="noopener noreferrer" className={styles['external-link-row']} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                      <p className={styles['service-link-underlined']}>Varsling av kritikkverdige forhold</p>
+                      <ExternalLinkIcon aria-hidden="true" className={styles['external-link-icon']} />
+                    </a>
+                    <div className={styles['service-desc-wrapper']}>
+                      <p className={styles['service-desc-text']}>Meld forhold som anses som uetiske, skadelige, eller i strid med forskrifter.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles['service-group']}>
+                  <p className={styles['service-category-title']}>Kurs og læring</p>
+                  <div>
+                    <a href="https://didac.rodekors.no" target="_blank" rel="noopener noreferrer" className={styles['external-link-row']} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                      <p className={styles['service-link-underlined']}>E-læring (Didac)</p>
+                      <ExternalLinkIcon aria-hidden="true" className={styles['external-link-icon']} />
+                    </a>
+                    <div className={styles['service-desc-wrapper']}>
+                      <p className={styles['service-desc-text']}>E-læringsplattform for opplæring innen førstehjelp, beredskap og andre ferdigheter.</p>
+                    </div>
+                  </div>
+                  <div>
+                    <a href="https://rodekors.no" target="_blank" rel="noopener noreferrer" className={styles['external-link-row']} style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                      <p className={styles['service-link-underlined']}>Ressurssystemet</p>
+                      <ExternalLinkIcon aria-hidden="true" className={styles['external-link-icon']} />
+                    </a>
+                    <div className={styles['service-desc-wrapper']}>
+                      <p className={styles['service-desc-text']}>Kursadministrasjon og påmelding.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
           </section>
         </section>
       </div>

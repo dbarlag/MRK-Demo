@@ -112,22 +112,3 @@ export interface TimeplanEvent {
   status: string;
 }
 
-// Dashboard
-export interface NyttigKort {
-  id: string;
-  subtittel: string;
-  tittel: string;
-  beskrivelse: string;
-  bildeSrc: string;
-}
-
-export interface EksternTjeneste {
-  navn: string;
-  url?: string;
-  beskrivelse: string;
-}
-
-export interface TjenesteKategori {
-  kategori: string;
-  tjenester: EksternTjeneste[];
-}

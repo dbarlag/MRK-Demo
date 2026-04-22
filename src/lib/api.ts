@@ -2,8 +2,7 @@ import { mockUser, mockParorende, mockErklaringer } from '@/data/mockUser';
 import { mockMedlemskap, mockAktiviteter, mockRoller, mockVerv } from '@/data/mockEngagement';
 import { mockKurser, mockSprak, mockSertifikater } from '@/data/mockCompetence';
 import { mockEvents, mockPameldinger } from '@/data/mockTimeplan';
-import { mockNyttigKort, mockTjenester } from '@/data/mockDashboard';
-import type { UserProfile, Parorende, Erklering, Medlemskap, Aktivitet, Rolle, Verv, Kurs, Sprak, Sertifikat, TimeplanEvent, NyttigKort, TjenesteKategori } from '@/types';
+import type { UserProfile, Parorende, Erklering, Medlemskap, Aktivitet, Rolle, Verv, Kurs, Sprak, Sertifikat, TimeplanEvent } from '@/types';
 
 // GitHub Pages static export: no API routes available, use mock data directly
 const isStatic = typeof window !== 'undefined' && (window as any).__NEXT_DATA__?.basePath === '/MRK-Demo';
@@ -38,9 +37,3 @@ export const fetchSertifikater = () => get<Sertifikat[]>('/user/sertifikater', m
 // Timeplan
 export const fetchTimeplan = () => get<TimeplanEvent[]>('/timeplan', mockEvents);
 export const fetchPameldinger = () => get<TimeplanEvent[]>('/pameldinger', mockPameldinger);
-
-// Dashboard
-export const fetchDashboard = () => get<{ nyttig: NyttigKort[]; tjenester: TjenesteKategori[] }>(
-  '/dashboard',
-  { nyttig: mockNyttigKort, tjenester: mockTjenester }
-);
