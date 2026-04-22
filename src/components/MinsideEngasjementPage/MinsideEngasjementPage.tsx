@@ -155,11 +155,7 @@ export default function MinsideEngasjementPage() {
             onMouseUp={onMouseUp}
             onMouseLeave={onMouseUp}
           >
-            {aktiviteter.length === 0 ? (
-              <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
-                Ingen aktiviteter registrert.
-              </Paragraph>
-            ) : aktiviteter.map((a) => (
+            {aktiviteter.map((a) => (
               <ActivityCard
                 key={a.id}
                 title={a.tittel}
@@ -181,11 +177,7 @@ export default function MinsideEngasjementPage() {
         <section className={styles['section-activities']}>
           <SectionHeader title="Roller" />
           <div className={styles['roller-gallery']}>
-            {roller.length === 0 ? (
-              <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
-                Ingen roller registrert.
-              </Paragraph>
-            ) : roller.map((r) => (
+            {roller.map((r) => (
               <ActivityCard
                 key={r.id}
                 title={r.tittel}
@@ -208,11 +200,7 @@ export default function MinsideEngasjementPage() {
         <section className={styles['section-activities']}>
           <SectionHeader title="Verv" />
           <div className={styles['roller-gallery']}>
-            {verv.length === 0 ? (
-              <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
-                Ingen verv registrert.
-              </Paragraph>
-            ) : verv.map((v) => (
+            {verv.map((v) => (
               <ActivityCard
                 key={v.id}
                 title={v.tittel}

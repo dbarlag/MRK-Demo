@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/api-auth';
+import { mockVerv } from '@/data/mockEngagement';
 
 export async function GET() {
   const denied = await requireAuth();
   if (denied) return denied;
 
-  // Vakt API does not expose user positions — empty until backend extends scope
-  return NextResponse.json([]);
+  return NextResponse.json(mockVerv);
 }

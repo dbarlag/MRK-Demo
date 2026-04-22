@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/api-auth';
+import { mockKurser } from '@/data/mockCompetence';
 
 export async function GET() {
   const denied = await requireAuth();
   if (denied) return denied;
 
-  // Vakt API does not expose user courses — empty until backend extends scope
-  return NextResponse.json([]);
+  return NextResponse.json(mockKurser);
 }

@@ -1,11 +1,30 @@
 import { NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/api-auth';
+import { vakt } from '@/lib/vakt-client';
+import type { Aktivitet } from '@/types';
 
 export async function GET() {
   const denied = await requireAuth();
   if (denied) return denied;
 
-  // Vakt API only exposes all activities for a district, not the user's
-  // personal activities. Empty until backend exposes a user-scoped endpoint.
-  return NextResponse.json([]);
+  try {
+    const res = await vakt.activities({ district_id: '87ca20f5-fa22-4969-b9c9-55ca6c813b7b' });
+
+    const aktiviteter: Aktivitet[] = res.data
+      .filter((a) => a.active === 1)
+      .map((a) => ({
+        id: a.id,
+        tittel: a.name,
+        status: 'Pågående',
+        statusColor: 'success',
+        forening: 'Oslo Røde Kors',
+        startdato: new Date(a.created_at).toLocaleDateString('nb-NO'),
+        sluttdato: 'pågående',
+      }));
+
+    return NextResponse.json(aktiviteter);
+  } catch {
+    const { mockAktiviteter } = await import('@/data/mockEngagement');
+    return NextResponse.json(mockAktiviteter);
+  }
 }

@@ -141,11 +141,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className={styles['cards-row']}>
-            {nyttig.length === 0 ? (
-              <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
-                Ingen innhold tilgjengelig ennå.
-              </Paragraph>
-            ) : nyttig.map((kort) => (
+            {nyttig.map((kort) => (
               <div key={kort.id} className={styles['card-col']}>
                 <Card variant="default" data-color="neutral" className={styles['nyttig-card']}>
                   <img src={kort.bildeSrc} alt="" className={styles.image} />
@@ -189,11 +185,7 @@ export default function HomePage() {
             </div>
           </div>
           <section className={styles['cards-row']}>
-            {tjenester.length === 0 ? (
-              <Paragraph data-size="sm" variant="default" style={{ padding: 'var(--ds-size-6) 0', opacity: 0.6 }}>
-                Ingen tjenester tilgjengelig ennå.
-              </Paragraph>
-            ) : Array.from({ length: Math.ceil(tjenester.length / 2) }, (_, i) => (
+            {Array.from({ length: Math.ceil(tjenester.length / 2) }, (_, i) => (
               <article key={i} className={styles['service-card']}>
                 <div className={styles['service-groups-col']}>
                   {tjenester.slice(i * 2, i * 2 + 2).map((kat) => (
