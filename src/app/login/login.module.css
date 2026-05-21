@@ -24,10 +24,6 @@
   width: auto;
 }
 
-.heading {
-  text-align: center;
-}
-
 .description {
   text-align: center;
   color: var(--ds-color-neutral-text-subtle);
