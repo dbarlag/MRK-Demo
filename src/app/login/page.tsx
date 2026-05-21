@@ -9,7 +9,7 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <img src={assetPath('/images/Rk%20Logo.png')} alt="Røde Kors" className={styles.logo} />
+        <img src={assetPath('/images/rk-logo.png')} alt="Røde Kors" className={styles.logo} />
         <Heading data-size="lg" level={1} className={styles.heading}>
           Mitt Røde Kors
         </Heading>
