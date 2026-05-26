@@ -2,7 +2,8 @@ import { mockUser, mockParorende, mockErklaringer } from '@/data/mockUser';
 import { mockMedlemskap, mockAktiviteter, mockRoller, mockVerv } from '@/data/mockEngagement';
 import { mockKurser, mockSprak, mockSertifikater } from '@/data/mockCompetence';
 import { mockEvents, mockPameldinger } from '@/data/mockTimeplan';
-import type { UserProfile, Parorende, Erklering, Medlemskap, Aktivitet, Rolle, Verv, Kurs, Sprak, Sertifikat, TimeplanEvent } from '@/types';
+import { mockAktivitetPreferanser } from '@/data/mockAktivitetPreferanser';
+import type { UserProfile, Parorende, Erklering, Medlemskap, Aktivitet, Rolle, Verv, Kurs, Sprak, Sertifikat, TimeplanEvent, AktivitetPreferanser } from '@/types';
 
 // GitHub Pages static export: no API routes available, use mock data directly
 const isStatic = typeof window !== 'undefined' && (window as any).__NEXT_DATA__?.basePath === '/MRK-Demo';
@@ -37,3 +38,22 @@ export const fetchSertifikater = () => get<Sertifikat[]>('/user/sertifikater', m
 // Timeplan
 export const fetchTimeplan = () => get<TimeplanEvent[]>('/timeplan', mockEvents);
 export const fetchPameldinger = () => get<TimeplanEvent[]>('/pameldinger', mockPameldinger);
+
+// Aktivitetspreferanser
+export const fetchAktivitetPreferanser = () =>
+  get<AktivitetPreferanser>('/user/aktivitet-preferanser', mockAktivitetPreferanser);
+
+export async function saveAktivitetPreferanser(prefs: AktivitetPreferanser): Promise<AktivitetPreferanser> {
+  if (isStatic) return prefs;
+  try {
+    const res = await fetch('/api/user/aktivitet-preferanser', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(prefs),
+    });
+    if (!res.ok) throw new Error(`API error: ${res.status}`);
+    return res.json();
+  } catch {
+    return prefs;
+  }
+}

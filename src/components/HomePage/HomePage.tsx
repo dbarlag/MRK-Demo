@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, Card, CardBlock, Divider, Heading, Paragraph } from 'rk-designsystem';
-import { PersonIcon, CalendarIcon, MegaphoneSpeakingIcon, BookIcon, ChevronRightIcon, ExternalLinkIcon } from '@navikt/aksel-icons';
+import { PersonIcon, CalendarIcon, MegaphoneSpeakingIcon, BookIcon, ChevronRightIcon, ExternalLinkIcon, HeartIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import { assetPath } from '@/lib/basePath';
@@ -122,6 +122,22 @@ export default function HomePage() {
               </div>
               <ChevronRightIcon aria-hidden="true" className={styles.iconbutton} />
             </a>
+          </div>
+          <div className={styles['nav-links-row']}>
+            <Link href="/preferanser" className={styles.link}>
+              <div className={styles.icon}>
+                <HeartIcon aria-hidden="true" className={styles.person} />
+              </div>
+              <div className={styles.body}>
+                <div className={styles['text-full-width']}>
+                  <Heading data-size="sm" level={3} data-color="secondary-color-orange" className={styles['nav-link-heading']}>Mine preferanser</Heading>
+                </div>
+                <div className={styles['text-full-width']}>
+                  <Paragraph data-size="sm" variant="default" className={styles['nav-link-text']}>Velg hvilke aktiviteter du er interessert i</Paragraph>
+                </div>
+              </div>
+              <ChevronRightIcon aria-hidden="true" className={styles.iconbutton} />
+            </Link>
           </div>
         </section>
 

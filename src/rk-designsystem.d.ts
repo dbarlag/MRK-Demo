@@ -29,6 +29,11 @@ declare module 'rk-designsystem' {
     Radio: FC<any>;
     Removable: FC<any>;
   };
+  export const Search: FC<any> & {
+    Input: FC<any>;
+    Button: FC<any>;
+    ClearButton: FC<any>;
+  };
   export function usePagination(options: {
     currentPage: number;
     totalPages: number;

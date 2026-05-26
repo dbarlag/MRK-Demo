@@ -95,6 +95,16 @@ export interface Sertifikat {
   klasse: string;
 }
 
+// Aktivitetspreferanser — one specific branch-activity pair
+export interface AktivitetPreferanser {
+  activityId: string | null;          // "{branchId}-{idx}", matches ActivityCard.id
+  globalActivityName: string | null;  // for fallback display
+  localActivityName: string | null;
+  municipality: string | null;
+  neighborhood: string | null;
+  branchName: string | null;
+}
+
 // Timeplan
 export interface TimeplanEvent {
   id: string;

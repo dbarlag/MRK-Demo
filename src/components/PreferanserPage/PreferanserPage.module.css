@@ -1,0 +1,359 @@
+/* Følger samme mønster som .home / .timeplan i resten av appen:
+ * full-bredde ytre wrapper med rosa RK-bakgrunn, indre body på max 1411px,
+ * og size-30 horisontal padding på desktop som faller til size-4 på mobil. */
+
+.page {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--ds-color-primary-color-red-background-tinted);
+  overflow: hidden;
+  padding-bottom: 120px;
+}
+
+.wrapper {
+  width: 100%;
+  align-self: stretch;
+}
+
+.body {
+  width: 100%;
+  max-width: 1411px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-size-6);
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: var(--ds-size-30);
+  padding-right: var(--ds-size-30);
+  padding-top: var(--ds-size-8);
+  padding-bottom: var(--ds-size-8);
+}
+
+/* Top: tilbake-knapp + heading + intro, samme spacing som .page-top på timeplan. */
+.top {
+  width: 100%;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-size-1);
+  box-sizing: border-box;
+  padding-left: var(--ds-size-4);
+  padding-right: var(--ds-size-4);
+}
+
+.btn-wrapper {
+  height: 48px;
+  width: fit-content;
+}
+
+.back-btn {
+  color: var(--ds-color-neutral-text-subtle, #5d5d5d);
+}
+
+.heading-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-size-2);
+  padding-left: var(--ds-size-2);
+  padding-right: var(--ds-size-2);
+}
+
+.heading {
+  --ds-heading-lg-font-weight: 400;
+  margin: 0;
+}
+
+.intro {
+  max-width: 720px;
+  color: var(--ds-color-neutral-text-subtle);
+  margin: 0;
+}
+
+/* Lokasjons-input — venstrejustert under top, samme inner-padding som top. */
+.location-row {
+  width: 100%;
+  align-self: stretch;
+  max-width: 32rem;
+  margin-right: auto;
+  padding-left: calc(var(--ds-size-4) + var(--ds-size-2));
+  padding-right: var(--ds-size-4);
+  box-sizing: border-box;
+}
+
+.filter-row {
+  width: 100%;
+  align-self: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-size-2);
+  padding-left: calc(var(--ds-size-4) + var(--ds-size-2));
+  padding-right: var(--ds-size-4);
+  box-sizing: border-box;
+}
+
+.filter-chip {
+  appearance: none;
+  border: 1px solid var(--ds-color-neutral-border-default);
+  background-color: var(--ds-color-neutral-background-default);
+  color: var(--ds-color-neutral-text-default);
+  border-radius: 9999px;
+  padding: var(--ds-size-2) var(--ds-size-4);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.filter-chip:hover {
+  background-color: var(--ds-color-neutral-background-subtle);
+}
+
+.filter-chip-active {
+  background-color: var(--ds-color-primary-base-default);
+  color: var(--ds-color-primary-contrast-default);
+  border-color: var(--ds-color-primary-base-default);
+}
+
+.fallback-note {
+  width: 100%;
+  align-self: stretch;
+  margin: 0;
+  padding: var(--ds-size-3) var(--ds-size-4);
+  background-color: var(--ds-color-neutral-background-default);
+  border: 1px solid var(--ds-color-neutral-border-subtle);
+  border-radius: var(--ds-border-radius-md);
+  font-size: var(--ds-body-sm-font-size, 0.875rem);
+  color: var(--ds-color-neutral-text-default);
+}
+
+/* Card grid — likhøy-teknikken fra prototypen. Hvert kort fyller cellen sin,
+ * blir en flex-column, og siste CardBlock (CTA) skyves til bunnen. */
+
+.grid {
+  width: 100%;
+  align-self: stretch;
+  display: grid;
+  gap: var(--ds-size-6);
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.grid :global(.ds-card) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  --dsc-card-block-border-width: 0;
+  --dsc-card-border-color: var(--ds-color-neutral-border-subtle);
+  overflow: hidden;
+}
+
+.grid :global(.ds-card) > *:last-child {
+  margin-top: auto;
+}
+
+.grid :global(.ds-card__block):first-child {
+  padding: 0;
+}
+
+.card-selected {
+  outline: 2px solid var(--ds-color-primary-base-default);
+  outline-offset: -2px;
+}
+
+.card-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: var(--ds-color-neutral-background-subtle);
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.selected-badge {
+  position: absolute;
+  top: var(--ds-size-2);
+  right: var(--ds-size-2);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--ds-color-primary-base-default);
+  color: var(--ds-color-primary-contrast-default);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-size-2);
+  margin-bottom: var(--ds-size-3);
+}
+
+.card-title {
+  --ds-heading-xs-font-weight: 600;
+  margin: 0;
+  color: var(--ds-color-neutral-text-default);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(1.3em * 2);
+}
+
+.card-meta {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-size-2);
+  font-size: var(--ds-body-sm-font-size, 0.875rem);
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-size-2);
+  color: var(--ds-color-neutral-text-default);
+  line-height: 1.3;
+}
+
+.meta-branch {
+  font-size: var(--ds-body-sm-font-size, 0.875rem);
+  color: var(--ds-color-neutral-text-subtle);
+  font-weight: 600;
+}
+
+.distance-pill {
+  display: inline-block;
+  padding: 0 var(--ds-size-2);
+  border-radius: 9999px;
+  background-color: var(--ds-color-primary-color-red-surface-tinted);
+  color: var(--ds-color-neutral-text-default);
+  font-size: var(--ds-body-sm-font-size, 0.875rem);
+  line-height: 1.6;
+  border: 1px solid var(--ds-color-neutral-border-subtle);
+}
+
+.card-cta {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-size-2);
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--ds-size-8) 0;
+  color: var(--ds-color-neutral-text-subtle);
+  margin: 0;
+}
+
+.cap-note {
+  width: 100%;
+  align-self: stretch;
+  margin: 0;
+  text-align: center;
+  font-size: var(--ds-body-sm-font-size, 0.875rem);
+  color: var(--ds-color-neutral-text-subtle);
+}
+
+.pagination {
+  width: 100%;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+}
+
+/* Save-bar — fast nederst, hvit bakgrunn så den skiller seg ut mot
+ * den rosa siden, samme inner-bredde som body. */
+.save-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--ds-color-neutral-background-default);
+  border-top: 1px solid var(--ds-color-neutral-border-subtle);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.save-bar-inner {
+  width: 100%;
+  max-width: 1411px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-left: var(--ds-size-30);
+  padding-right: var(--ds-size-30);
+  padding-top: var(--ds-size-4);
+  padding-bottom: var(--ds-size-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-size-4);
+}
+
+.save-count {
+  margin: 0;
+}
+
+.save-msg {
+  color: var(--ds-color-success-text-default, #128a3c);
+  font-weight: 600;
+}
+
+.save-msg-error {
+  color: var(--ds-color-danger-text-default, #b32020);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .body {
+    padding-left: var(--ds-size-4);
+    padding-right: var(--ds-size-4);
+    padding-top: var(--ds-size-4);
+    padding-bottom: var(--ds-size-4);
+  }
+
+  .top,
+  .heading-wrap,
+  .location-row,
+  .filter-row {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .save-bar-inner {
+    padding-left: var(--ds-size-4);
+    padding-right: var(--ds-size-4);
+  }
+}

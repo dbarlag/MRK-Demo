@@ -1,4 +1,8 @@
 import type { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { mockUser } from '@/data/mockUser';
+
+const isDevLoginEnabled = process.env.NEXT_PUBLIC_ENABLE_DEV_LOGIN === 'true';
 
 function decodeJwtPayload(token: string | undefined): unknown {
   if (!token) return null;
@@ -11,6 +15,22 @@ function decodeJwtPayload(token: string | undefined): unknown {
   }
 }
 
+/** Dev-only: signs the user in as the mock user without Okta. Gated on
+ * NEXT_PUBLIC_ENABLE_DEV_LOGIN so it is impossible to enable in a production
+ * deploy unless that env var is explicitly set. */
+const devProvider = CredentialsProvider({
+  id: 'dev',
+  name: 'Demo-bruker',
+  credentials: {},
+  async authorize() {
+    return {
+      id: mockUser.id,
+      name: mockUser.name,
+      email: mockUser.email,
+    };
+  },
+});
+
 export const authOptions: NextAuthOptions = {
   providers: [
     {
@@ -22,7 +42,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.OKTA_CLIENT_SECRET,
       authorization: { params: { scope: 'openid email profile' } },
       idToken: true,
-      profile(profile) {
+      profile(profile: { sub: string; name?: string; email?: string }) {
         console.log('[OKTA_DEBUG] userinfo profile:', JSON.stringify(profile, null, 2));
         return {
           id: profile.sub,
@@ -31,6 +51,7 @@ export const authOptions: NextAuthOptions = {
         };
       },
     },
+    ...(isDevLoginEnabled ? [devProvider] : []),
   ],
   callbacks: {
     async jwt({ token, account }) {

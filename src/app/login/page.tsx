@@ -5,6 +5,8 @@ import { Button, Paragraph } from 'rk-designsystem';
 import { assetPath } from '@/lib/basePath';
 import styles from './login.module.css';
 
+const devLoginEnabled = process.env.NEXT_PUBLIC_ENABLE_DEV_LOGIN === 'true';
+
 export default function LoginPage() {
   return (
     <div className={styles.container}>
@@ -25,6 +27,16 @@ export default function LoginPage() {
         >
           Logg inn med Okta
         </Button>
+        {devLoginEnabled ? (
+          <Button
+            variant="secondary"
+            data-color="neutral"
+            className={styles.button}
+            onClick={() => signIn('dev', { callbackUrl: '/' })}
+          >
+            Logg inn som demo-bruker
+          </Button>
+        ) : null}
       </div>
     </div>
   );
