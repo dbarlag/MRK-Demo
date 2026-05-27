@@ -110,11 +110,18 @@ type BranchesEnvelope = { data?: { branches?: RawBranch[] } }
 const RAW_BRANCHES: RawBranch[] =
   (branchesData as BranchesEnvelope).data?.branches ?? []
 
-/** Flatten active branches × activities into one list, one card per pair. */
+/** Flatten active branches × activities into one list, one card per pair.
+ * The source data contains at least one repeated branchId (L192 / Stryn Røde
+ * Kors), so we dedupe by branchId — first occurrence wins. Without this the
+ * generated `${branchId}-${i}` keys collide and React warns about duplicate
+ * keys when the cards render. */
 export function getAllActivities(): ActivityCard[] {
   const out: ActivityCard[] = []
+  const seenBranchIds = new Set<string>()
   for (const b of RAW_BRANCHES) {
     if (!b.branchStatus?.isActive) continue
+    if (seenBranchIds.has(b.branchId)) continue
+    seenBranchIds.add(b.branchId)
     const acts = b.branchActivities ?? []
     if (acts.length === 0) continue
     const municipality = b.branchLocation?.municipality ?? null
