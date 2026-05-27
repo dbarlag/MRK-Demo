@@ -1,0 +1,5 @@
+.tabs-wrapper { width: 100%; }
+.section-title { --ds-heading-sm-font-weight: 600; font-family: 'Myriad Pro', sans-serif; }
+.section-title-wrapper { width: 100%; height: 26px; flex-grow: 1; flex-shrink: 0; flex-basis: 0; text-align: left; }
+.section-top-row { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: row; gap: 10px; justify-content: space-between; align-items: center; }
+.section-top { width: 100%; height: auto; align-self: stretch; display: flex; flex-direction: column; gap: var(--ds-size-1); }

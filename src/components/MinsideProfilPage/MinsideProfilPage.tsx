@@ -2,13 +2,15 @@
 
 import { assetPath } from '@/lib/basePath';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Avatar, Button, Divider, Heading, Paragraph } from 'rk-designsystem';
 import { PencilIcon, TrashIcon, PlusIcon, ExternalLinkIcon, UploadIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
 import LoadingSpinner from '../shared/LoadingSpinner';
 import MinsideTopSection from '../shared/MinsideTopSection';
 import InfoRow from '../shared/InfoRow';
+import ModalBackdrop from '../shared/ModalBackdrop';
+import { useDragScroll } from '@/hooks/useDragScroll';
 import { fetchProfile, fetchParorende, fetchErklaringer } from '@/lib/api';
 import type { UserProfile, Parorende, Erklering } from '@/types';
 import styles from './MinsideProfilPage.module.css';
@@ -19,30 +21,6 @@ const profilRowProps = {
   labelClass: 'info-label',
   valueClass: 'info-value',
 };
-
-// Modal backdrop with Escape key support
-function ModalBackdrop({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', handleEsc);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = '';
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
-      role="dialog"
-      aria-modal="true"
-    >
-      {children}
-    </div>
-  );
-}
 
 function EditModal({ title, fields, onSave, onCancel }: {
   title: string;
@@ -106,31 +84,12 @@ export default function MinsideProfilPage() {
   const [editingParorende, setEditingParorende] = useState<Parorende | null>(null);
   const [addingParorende, setAddingParorende] = useState(false);
   const [removingParorende, setRemovingParorende] = useState<Parorende | null>(null);
-  const galleryRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollStart = useRef(0);
+  const { ref: galleryRef, handlers: galleryHandlers } = useDragScroll<HTMLDivElement>();
 
   useEffect(() => {
     fetchProfile().then(setUser).catch(console.error);
     fetchParorende().then(setParorende).catch(console.error);
     fetchErklaringer().then(setErklaringer).catch(console.error);
-  }, []);
-
-  const onMouseDown = useCallback((e: React.MouseEvent) => {
-    isDragging.current = true;
-    startX.current = e.pageX;
-    scrollStart.current = galleryRef.current?.scrollLeft ?? 0;
-  }, []);
-
-  const onMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!isDragging.current || !galleryRef.current) return;
-    e.preventDefault();
-    galleryRef.current.scrollLeft = scrollStart.current - (e.pageX - startX.current);
-  }, []);
-
-  const onMouseUp = useCallback(() => {
-    isDragging.current = false;
   }, []);
 
   if (!user) return (
@@ -299,10 +258,7 @@ export default function MinsideProfilPage() {
             <div
               className={styles['declarations-gallery']}
               ref={galleryRef}
-              onMouseDown={onMouseDown}
-              onMouseMove={onMouseMove}
-              onMouseUp={onMouseUp}
-              onMouseLeave={onMouseUp}
+              {...galleryHandlers}
             >
               {erklaringer.map((e) => (
                 <article key={e.id} className={styles.card}>

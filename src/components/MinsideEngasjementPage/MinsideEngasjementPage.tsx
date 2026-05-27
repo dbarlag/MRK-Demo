@@ -1,29 +1,16 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Divider, Heading, Paragraph, Tag } from 'rk-designsystem';
 import { ArrowRightIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
 import MinsideTopSection from '../shared/MinsideTopSection';
 import ActivityCard from '../shared/ActivityCard';
+import SectionHeader from '../shared/SectionHeader';
+import { useDragScroll } from '@/hooks/useDragScroll';
 import { fetchMedlemskap, fetchAktiviteter, fetchRoller, fetchVerv } from '@/lib/api';
 import type { Medlemskap, Aktivitet, Rolle, Verv } from '@/types';
 import styles from './MinsideEngasjementPage.module.css';
-
-function SectionHeader({ title }: { title: string }) {
-  return (
-    <div className={styles['section-top']}>
-      <div className={styles['section-top-row']}>
-        <div className={styles['section-title-wrapper']}>
-          <Heading data-size="sm" level={4} className={styles['section-title']}>{title}</Heading>
-        </div>
-      </div>
-      <div className={styles['tabs-wrapper']}>
-        <Divider />
-      </div>
-    </div>
-  );
-}
 
 function IkkeMedlemCard({ forening, styles: s }: { forening: string; styles: Record<string, string> }) {
   const [valg, setValg] = useState<'medlemskap' | 'familie'>('medlemskap');
@@ -83,33 +70,13 @@ export default function MinsideEngasjementPage() {
   const [roller, setRoller] = useState<Rolle[]>([]);
   const [verv, setVerv] = useState<Verv[]>([]);
 
-  const galleryRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollStart = useRef(0);
+  const { ref: galleryRef, handlers: galleryHandlers } = useDragScroll<HTMLDivElement>();
 
   useEffect(() => {
     fetchMedlemskap().then(setMedlemskap).catch(console.error);
     fetchAktiviteter().then(setAktiviteter).catch(console.error);
     fetchRoller().then(setRoller).catch(console.error);
     fetchVerv().then(setVerv).catch(console.error);
-  }, []);
-
-  const onMouseDown = useCallback((e: React.MouseEvent) => {
-    isDragging.current = true;
-    startX.current = e.pageX;
-    scrollStart.current = galleryRef.current?.scrollLeft ?? 0;
-  }, []);
-
-  const onMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!isDragging.current || !galleryRef.current) return;
-    e.preventDefault();
-    const dx = e.pageX - startX.current;
-    galleryRef.current.scrollLeft = scrollStart.current - dx;
-  }, []);
-
-  const onMouseUp = useCallback(() => {
-    isDragging.current = false;
   }, []);
 
   return (
@@ -149,10 +116,7 @@ export default function MinsideEngasjementPage() {
           <div
             className={styles['activity-gallery']}
             ref={galleryRef}
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseUp={onMouseUp}
-            onMouseLeave={onMouseUp}
+            {...galleryHandlers}
           >
             {aktiviteter.map((a) => (
               <ActivityCard

@@ -7,47 +7,11 @@ import SiteHeader from '../shared/SiteHeader';
 import MinsideTopSection from '../shared/MinsideTopSection';
 import ActivityCard from '../shared/ActivityCard';
 import InfoRow from '../shared/InfoRow';
+import ModalBackdrop from '../shared/ModalBackdrop';
+import SectionHeader from '../shared/SectionHeader';
 import { fetchKurser, fetchSprak, fetchSertifikater } from '@/lib/api';
 import type { Kurs, Sprak, Sertifikat } from '@/types';
 import styles from './MinsideKompetansePage.module.css';
-
-function SectionHeader({ title }: { title: string }) {
-  return (
-    <div className={styles['section-top']}>
-      <div className={styles['section-top-row']}>
-        <div className={styles['section-title-wrapper']}>
-          <Heading data-size="sm" level={4} className={styles['section-title']}>{title}</Heading>
-        </div>
-      </div>
-      <div className={styles['tabs-wrapper']}>
-        <Divider />
-      </div>
-    </div>
-  );
-}
-
-function ModalBackdrop({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', handleEsc);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = '';
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
-      role="dialog"
-      aria-modal="true"
-    >
-      {children}
-    </div>
-  );
-}
 
 function EditListModal({ title, items, labelKey, valueKey, onSave, onCancel }: {
   title: string;
