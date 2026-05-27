@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Button, Card, CardBlock, Divider, Heading, Paragraph } from 'rk-designsystem';
 import { PersonIcon, CalendarIcon, MegaphoneSpeakingIcon, BookIcon, ChevronRightIcon, ExternalLinkIcon, HeartIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
-import LoadingSpinner from '../shared/LoadingSpinner';
 import { assetPath } from '@/lib/basePath';
 import { fetchProfile } from '@/lib/api';
 import type { UserProfile } from '@/types';

@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button, Divider, Heading, Paragraph, Tag } from 'rk-designsystem';
 import { ArrowRightIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
-import LoadingSpinner from '../shared/LoadingSpinner';
 import MinsideTopSection from '../shared/MinsideTopSection';
 import ActivityCard from '../shared/ActivityCard';
 import { fetchMedlemskap, fetchAktiviteter, fetchRoller, fetchVerv } from '@/lib/api';
