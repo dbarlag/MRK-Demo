@@ -32,6 +32,8 @@ function EditModal({ title, fields, onSave, onCancel }: {
     Object.fromEntries(fields.map((f) => [f.key, f.value]))
   );
 
+  const isValid = Object.values(values).every((v) => v.trim());
+
   return (
     <ModalBackdrop onClose={onCancel}>
       <div style={{ background: 'var(--ds-color-neutral-background-default)', borderRadius: 'var(--ds-border-radius-xl)', padding: 'var(--ds-size-8)', maxWidth: '500px', width: '90%', display: 'flex', flexDirection: 'column', gap: 'var(--ds-size-4)' }}>
@@ -49,7 +51,7 @@ function EditModal({ title, fields, onSave, onCancel }: {
         ))}
         <div style={{ display: 'flex', gap: 'var(--ds-size-4)', justifyContent: 'flex-end' }}>
           <Button variant="tertiary" data-color="neutral" onClick={onCancel}>Avbryt</Button>
-          <Button variant="primary" data-color="primary" onClick={() => { if (Object.values(values).every((v) => v.trim())) onSave(values); }}>Lagre</Button>
+          <Button variant="primary" data-color="primary" disabled={!isValid} onClick={() => onSave(values)}>Lagre</Button>
         </div>
       </div>
     </ModalBackdrop>
@@ -116,7 +118,7 @@ export default function MinsideProfilPage() {
 
   const handleAddParorende = (values: Record<string, string>) => {
     const newP: Parorende = {
-      id: String(Date.now()),
+      id: crypto.randomUUID(),
       navn: values.navn,
       relasjon: values.relasjon,
       telefon: values.telefon,

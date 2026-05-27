@@ -5,8 +5,10 @@ import { mockEvents, mockPameldinger } from '@/data/mockTimeplan';
 import { mockAktivitetPreferanser } from '@/data/mockAktivitetPreferanser';
 import type { UserProfile, Parorende, Erklering, Medlemskap, Aktivitet, Rolle, Verv, Kurs, Sprak, Sertifikat, TimeplanEvent, AktivitetPreferanser } from '@/types';
 
-// GitHub Pages static export: no API routes available, use mock data directly
-const isStatic = typeof window !== 'undefined' && (window as any).__NEXT_DATA__?.basePath === '/MRK-Demo';
+// GitHub Pages static export: no API routes available, use mock data directly.
+// Set in next.config.mjs from GITHUB_PAGES=true; works on both server and client
+// because Next inlines values from `env` at build time.
+const isStatic = process.env.IS_STATIC_EXPORT === 'true';
 
 async function get<T>(path: string, fallback: T): Promise<T> {
   if (isStatic) return fallback;

@@ -22,7 +22,7 @@ export default function SiteHeader({ secondaryLogoSrc = assetPath('/images/28cee
     if (!window.confirm('Logg ut?')) return;
     let oktaLogoutUrl: string | undefined;
     try {
-      const res = await fetch('/api/auth/okta-signout');
+      const res = await fetch(assetPath('/api/auth/okta-signout'));
       if (res.ok) {
         const data = await res.json();
         oktaLogoutUrl = data.url;
@@ -31,7 +31,7 @@ export default function SiteHeader({ secondaryLogoSrc = assetPath('/images/28cee
       // fall through to NextAuth-only sign-out
     }
     await signOut({ redirect: false });
-    window.location.href = oktaLogoutUrl ?? '/login';
+    window.location.href = oktaLogoutUrl ?? assetPath('/login');
   };
 
   return (

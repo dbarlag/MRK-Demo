@@ -109,7 +109,7 @@ export default function MinsideKompetansePage() {
                 tagLabel={k.status}
                 tagColor={k.statusColor}
                 rows={[
-                  { label: 'Førening', value: k.forening },
+                  { label: 'Forening', value: k.forening },
                   { label: 'Dato', value: k.dato },
                   { label: 'Type: ', value: k.type },
                 ]}

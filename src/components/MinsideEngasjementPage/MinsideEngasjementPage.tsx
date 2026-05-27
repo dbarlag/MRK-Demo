@@ -27,7 +27,7 @@ function IkkeMedlemCard({ forening, styles: s }: { forening: string; styles: Rec
       </div>
       <div className={s.footer}>
         <div className={s.line1} style={{ gap: '10px' }}>
-          <Paragraph data-size="sm" variant="default" style={{ fontWeight: 600 }}>Førening</Paragraph>
+          <Paragraph data-size="sm" variant="default" style={{ fontWeight: 600 }}>Forening</Paragraph>
           <Paragraph data-size="sm" variant="default">{forening}</Paragraph>
         </div>
         <Paragraph data-size="sm" variant="default">
@@ -97,7 +97,7 @@ export default function MinsideEngasjementPage() {
                 tagLabel={medlemskap.status}
                 tagColor={medlemskap.statusColor}
                 rows={[
-                  { label: 'Førening', value: medlemskap.forening },
+                  { label: 'Forening', value: medlemskap.forening },
                   { label: 'Startdato:', value: medlemskap.startdato },
                   { label: 'Sluttdato', value: medlemskap.sluttdato, valueColor: 'success' },
                   { label: 'Type: ', value: medlemskap.type },
@@ -125,7 +125,7 @@ export default function MinsideEngasjementPage() {
                 tagLabel={a.status}
                 tagColor={a.statusColor}
                 rows={[
-                  { label: 'Førening:', value: a.forening },
+                  { label: 'Forening:', value: a.forening },
                   { label: 'Startdato:', value: a.startdato },
                   { label: 'Sluttdato', value: a.sluttdato, valueColor: a.sluttdato === 'pågående' ? 'success' : undefined },
                   ...(a.gruppe ? [{ label: 'Gruppe: ', value: a.gruppe }] : []),
@@ -147,7 +147,7 @@ export default function MinsideEngasjementPage() {
                 tagLabel={r.status}
                 tagColor={r.statusColor}
                 rows={[
-                  { label: 'Førening:', value: r.forening },
+                  { label: 'Forening:', value: r.forening },
                   ...(r.aktivitet ? [{ label: 'Aktivitet:', value: r.aktivitet }] : []),
                   { label: 'Startdato:', value: r.startdato },
                   { label: 'Sluttdato', value: r.sluttdato, valueColor: r.sluttdato === 'pågående' ? 'success' : undefined },
@@ -170,7 +170,7 @@ export default function MinsideEngasjementPage() {
                 tagLabel={v.status}
                 tagColor={v.statusColor}
                 rows={[
-                  { label: 'Førening:', value: v.forening },
+                  { label: 'Forening:', value: v.forening },
                   { label: 'Startdato:', value: v.startdato },
                   { label: 'Sluttdato', value: v.sluttdato, valueColor: v.sluttdato === 'pågående' ? 'success' : undefined },
                 ]}

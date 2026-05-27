@@ -41,13 +41,13 @@ describe('ActivityCard', () => {
         tagLabel="Pågående"
         tagColor="success"
         rows={[
-          { label: 'Førening:', value: 'Volda Røde Kors' },
+          { label: 'Forening:', value: 'Volda Røde Kors' },
           { label: 'Startdato:', value: '05.05.2024' },
         ]}
         styles={mockStyles}
       />
     );
-    expect(screen.getByText('Førening:')).toBeInTheDocument();
+    expect(screen.getByText('Forening:')).toBeInTheDocument();
     expect(screen.getByText('Volda Røde Kors')).toBeInTheDocument();
     expect(screen.getByText('Startdato:')).toBeInTheDocument();
     expect(screen.getByText('05.05.2024')).toBeInTheDocument();
