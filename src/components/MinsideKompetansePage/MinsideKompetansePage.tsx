@@ -31,6 +31,15 @@ function EditListModal({ title, items, labelKey, valueKey, onSave, onCancel }: {
 
   const removeRow = (idx: number) => setRows((prev) => prev.filter((_, i) => i !== idx));
 
+  // Allow rows that are fully empty (they get filtered out by the caller).
+  // Block save if any row is partially filled — that's a user mistake, not
+  // an intent to drop the row.
+  const isValid = rows.every((r) => {
+    const hasLabel = r.label.trim().length > 0;
+    const hasValue = r.value.trim().length > 0;
+    return hasLabel === hasValue;
+  });
+
   return (
     <ModalBackdrop onClose={onCancel}>
       <div style={{ background: 'var(--ds-color-neutral-background-default)', borderRadius: 'var(--ds-border-radius-xl)', padding: 'var(--ds-size-8)', maxWidth: '500px', width: '90%', display: 'flex', flexDirection: 'column', gap: 'var(--ds-size-4)', maxHeight: '80vh', overflow: 'auto' }}>
@@ -70,7 +79,7 @@ function EditListModal({ title, items, labelKey, valueKey, onSave, onCancel }: {
         </button>
         <div style={{ display: 'flex', gap: 'var(--ds-size-4)', justifyContent: 'flex-end' }}>
           <Button variant="tertiary" data-color="neutral" onClick={onCancel}>Avbryt</Button>
-          <Button variant="primary" data-color="primary" onClick={() => onSave(rows)}>Lagre</Button>
+          <Button variant="primary" data-color="primary" disabled={!isValid} onClick={() => onSave(rows)}>Lagre</Button>
         </div>
       </div>
     </ModalBackdrop>
@@ -178,7 +187,7 @@ export default function MinsideKompetansePage() {
           labelKey="Språk"
           valueKey="Nivå"
           onSave={(items) => {
-            setSprak(items.filter((i) => i.label).map((i) => ({ sprak: i.label, niva: i.value })));
+            setSprak(items.filter((i) => i.label.trim()).map((i) => ({ sprak: i.label, niva: i.value })));
             setEditingSprak(false);
           }}
           onCancel={() => setEditingSprak(false)}
@@ -192,7 +201,7 @@ export default function MinsideKompetansePage() {
           labelKey="Type"
           valueKey="Klasse"
           onSave={(items) => {
-            setSertifikater(items.filter((i) => i.label).map((i) => ({ type: i.label, klasse: i.value })));
+            setSertifikater(items.filter((i) => i.label.trim()).map((i) => ({ type: i.label, klasse: i.value })));
             setEditingSertifikater(false);
           }}
           onCancel={() => setEditingSertifikater(false)}

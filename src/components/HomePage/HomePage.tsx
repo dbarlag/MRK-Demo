@@ -44,18 +44,24 @@ export default function HomePage() {
           </div>
           <div className={styles['actions-right']}>
             <div className={styles['btn-wrapper']}>
-              <Button
-                loading={false}
-                showIconRight
-                showIconLeft={false}
-                variant="secondary"
-                data-color="primary"
-                className={styles['feedback-btn']}
-                onClick={() => window.open('https://rodekors.no/tilbakemelding', '_blank')}
+              <a
+                href="https://rodekors.no/tilbakemelding"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
               >
-                Gi tilbakemelding
-                <ExternalLinkIcon aria-hidden="true" style={{ width: '1em', height: '1em' }} />
-              </Button>
+                <Button
+                  loading={false}
+                  showIconRight
+                  showIconLeft={false}
+                  variant="secondary"
+                  data-color="primary"
+                  className={styles['feedback-btn']}
+                >
+                  Gi tilbakemelding
+                  <ExternalLinkIcon aria-hidden="true" style={{ width: '1em', height: '1em' }} />
+                </Button>
+              </a>
             </div>
           </div>
         </section>

@@ -223,11 +223,20 @@ export default function TimeplanPage() {
                 <div className={styles.selected}>
                   {ALL_FILTERS.map((filter) =>
                     activeFilters.has(filter) ? (
-                      <div key={filter} className={styles[FILTER_CHIP_CLASSES[filter]]} style={{ cursor: 'pointer' }} onClick={() => toggleFilter(filter)}>
+                      <div
+                        key={filter}
+                        className={styles[FILTER_CHIP_CLASSES[filter]]}
+                        style={{ cursor: 'pointer' }}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Fjern filter ${FILTER_LABELS[filter]}`}
+                        onClick={() => toggleFilter(filter)}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFilter(filter); } }}
+                      >
                         <div className={styles['chip-text']}>
                           <Paragraph data-size="sm" variant="short">{FILTER_LABELS[filter]}</Paragraph>
                         </div>
-                        <XMarkIcon aria-label={`Fjern ${FILTER_LABELS[filter]}`} className={styles['x-mark']} />
+                        <XMarkIcon aria-hidden="true" className={styles['x-mark']} />
                       </div>
                     ) : null
                   )}
