@@ -1,0 +1,446 @@
+{
+  "title": "Mitt Røde Kors — datafelter",
+  "description": "Felter frontenden trenger fra CRM. Navngivning og struktur følger schema.org. Slå opp på lenkene for typer og beskrivelser. Egendefinerte verdier (ikke i schema.org) ligger som PropertyValue under additionalProperty[].",
+
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/user/profile",
+      "description": "Brukerens profil. Vises som hilsen på hjem og på Min side → Profil.",
+      "responseSchema": "Person"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/user/profile",
+      "description": "Oppdater redigerbare profilfelter (telefon, e-post, adresse). Andre felter er låst.",
+      "requestSchema": "PersonUpdate",
+      "responseSchema": "Person"
+    },
+
+    {
+      "method": "GET",
+      "path": "/api/user/parorende",
+      "description": "Brukerens pårørende-poster. Vises på Min side → Profil → Pårørende.",
+      "responseSchema": "NextOfKin[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/user/parorende",
+      "description": "Legg til ny pårørende.",
+      "requestSchema": "NextOfKinCreate",
+      "responseSchema": "NextOfKin"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/user/parorende/{id}",
+      "description": "Endre en eksisterende pårørende.",
+      "requestSchema": "NextOfKinCreate",
+      "responseSchema": "NextOfKin"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/user/parorende/{id}",
+      "description": "Fjern en pårørende."
+    },
+
+    {
+      "method": "GET",
+      "path": "/api/user/erklaringer",
+      "description": "Erklæringer (etikk, taushet) og attester (politiattest). Vises på Min side → Profil → Erklæringer.",
+      "responseSchema": "Declaration[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/user/erklaringer/politiattest",
+      "description": "Last opp politiattest. Multipart/form-data.",
+      "requestSchema": "PoliceCertificateUpload",
+      "responseSchema": "Declaration",
+      "contentType": "multipart/form-data"
+    },
+
+    {
+      "method": "GET",
+      "path": "/api/user/medlemskap",
+      "description": "Brukerens medlemskap. Vises på Min side → Engasjement → Medlemskap. Returner med status 'Inaktiv' hvis brukeren ikke er medlem — frontenden viser da 'Bli medlem'-kortet.",
+      "responseSchema": "Membership"
+    },
+    {
+      "method": "POST",
+      "path": "/api/user/medlemskap",
+      "description": "Meld brukeren inn som medlem.",
+      "requestSchema": "MembershipApplication",
+      "responseSchema": "Membership"
+    },
+
+    {
+      "method": "GET",
+      "path": "/api/user/aktiviteter",
+      "description": "Frivillige aktiviteter brukeren er tildelt. Vises på Min side → Engasjement → Aktiviteter.",
+      "responseSchema": "VolunteerActivity[]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user/roller",
+      "description": "Operasjonelle roller brukeren har (f.eks. vaktansvarlig). Vises på Min side → Engasjement → Roller.",
+      "responseSchema": "VolunteerRole[]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user/verv",
+      "description": "Tillitsverv (styre- og rådposisjoner). Vises på Min side → Engasjement → Verv.",
+      "responseSchema": "ElectedPosition[]"
+    },
+
+    {
+      "method": "GET",
+      "path": "/api/user/kurser",
+      "description": "Kurs brukeren har fullført. Vises på Min side → Kompetanse → Kurser.",
+      "responseSchema": "CompletedCourse[]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user/spraker",
+      "description": "Språk brukeren behersker, med selvrapportert nivå. Vises på Min side → Kompetanse → Språker.",
+      "responseSchema": "LanguageProficiency[]"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/user/spraker",
+      "description": "Erstatt språklisten. Send full liste; backend overskriver.",
+      "requestSchema": "LanguageProficiency[]",
+      "responseSchema": "LanguageProficiency[]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/user/sertifikater",
+      "description": "Sertifikater (i dag førerkort). Vises på Min side → Kompetanse → Sertifikater.",
+      "responseSchema": "Credential[]"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/user/sertifikater",
+      "description": "Erstatt sertifikatlisten.",
+      "requestSchema": "Credential[]",
+      "responseSchema": "Credential[]"
+    },
+
+    {
+      "method": "GET",
+      "path": "/api/timeplan",
+      "description": "Kommende vakter, kurs og arrangementer brukeren kan melde seg på. Vises på Min timeplan → Kommende.",
+      "responseSchema": "ScheduleEvent[]"
+    },
+    {
+      "method": "GET",
+      "path": "/api/pameldinger",
+      "description": "Hendelser brukeren er påmeldt. Vises på Min timeplan → Mine påmeldinger.",
+      "responseSchema": "ScheduleEvent[]"
+    },
+    {
+      "method": "POST",
+      "path": "/api/timeplan/{eventId}/pamelding",
+      "description": "Meld brukeren på en hendelse. 409 hvis allerede påmeldt eller fullt.",
+      "responseSchema": "ScheduleEvent"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/timeplan/{eventId}/pamelding",
+      "description": "Meld brukeren av en hendelse."
+    },
+
+    {
+      "method": "GET",
+      "path": "/api/user/aktivitet-preferanser",
+      "description": "Brukerens valgte aktivitetspreferanse. Vises på Mine preferanser. Returner alle felter som null hvis ingen er valgt.",
+      "responseSchema": "ActivityPreference"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/user/aktivitet-preferanser",
+      "description": "Erstatt aktivitetspreferansen.",
+      "requestSchema": "ActivityPreference",
+      "responseSchema": "ActivityPreference"
+    }
+  ],
+
+  "schemas": {
+    "Person": {
+      "$type": "https://schema.org/Person",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "birthDate": "https://schema.org/birthDate",
+        "email": "https://schema.org/email",
+        "telephone": "https://schema.org/telephone",
+        "address": {
+          "$type": "https://schema.org/PostalAddress",
+          "fields": {
+            "streetAddress": "https://schema.org/streetAddress",
+            "postalCode": "https://schema.org/postalCode",
+            "addressLocality": "https://schema.org/addressLocality",
+            "addressCountry": "https://schema.org/addressCountry"
+          }
+        },
+        "memberOf": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "identifier": "https://schema.org/identifier",
+            "name": "https://schema.org/name"
+          }
+        },
+        "additionalProperty": {
+          "$type": "https://schema.org/PropertyValue",
+          "propertyIDs": ["rkNr", "rkEmail"],
+          "fields": {
+            "propertyID": "https://schema.org/propertyID",
+            "value": "https://schema.org/value"
+          }
+        }
+      }
+    },
+
+    "PersonUpdate": {
+      "fields": {
+        "email": "https://schema.org/email",
+        "telephone": "https://schema.org/telephone",
+        "address": {
+          "$type": "https://schema.org/PostalAddress",
+          "fields": {
+            "streetAddress": "https://schema.org/streetAddress",
+            "postalCode": "https://schema.org/postalCode",
+            "addressLocality": "https://schema.org/addressLocality"
+          }
+        }
+      }
+    },
+
+    "NextOfKin": {
+      "$type": "https://schema.org/Person",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "email": "https://schema.org/email",
+        "telephone": "https://schema.org/telephone",
+        "additionalType": "https://schema.org/additionalType"
+      }
+    },
+
+    "NextOfKinCreate": {
+      "fields": {
+        "name": "https://schema.org/name",
+        "email": "https://schema.org/email",
+        "telephone": "https://schema.org/telephone",
+        "additionalType": "https://schema.org/additionalType"
+      }
+    },
+
+    "Declaration": {
+      "$type": "https://schema.org/DigitalDocument",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "additionalType": "https://schema.org/additionalType",
+        "dateCreated": "https://schema.org/dateCreated",
+        "validThrough": "https://schema.org/validThrough",
+        "contentUrl": "https://schema.org/contentUrl"
+      }
+    },
+
+    "PoliceCertificateUpload": {
+      "fields": {
+        "file": "https://schema.org/encoding",
+        "dateIssued": "https://schema.org/dateCreated"
+      }
+    },
+
+    "Membership": {
+      "$type": "https://schema.org/ProgramMembership",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "membershipNumber": "https://schema.org/membershipNumber",
+        "hostingOrganization": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "identifier": "https://schema.org/identifier",
+            "name": "https://schema.org/name"
+          }
+        },
+        "startDate": "https://schema.org/startDate",
+        "endDate": "https://schema.org/endDate",
+        "additionalType": "https://schema.org/additionalType"
+      }
+    },
+
+    "MembershipApplication": {
+      "fields": {
+        "additionalType": "https://schema.org/additionalType",
+        "hostingOrganization": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "identifier": "https://schema.org/identifier"
+          }
+        }
+      }
+    },
+
+    "VolunteerActivity": {
+      "$type": "https://schema.org/VolunteerAction",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "provider": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "identifier": "https://schema.org/identifier",
+            "name": "https://schema.org/name"
+          }
+        },
+        "startDate": "https://schema.org/startDate",
+        "endDate": "https://schema.org/endDate",
+        "actionStatus": "https://schema.org/actionStatus",
+        "memberOf": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "name": "https://schema.org/name"
+          }
+        }
+      }
+    },
+
+    "VolunteerRole": {
+      "$type": "https://schema.org/Role",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "roleName": "https://schema.org/roleName",
+        "memberOf": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "identifier": "https://schema.org/identifier",
+            "name": "https://schema.org/name"
+          }
+        },
+        "relatedTo": {
+          "$type": "https://schema.org/VolunteerAction",
+          "fields": {
+            "name": "https://schema.org/name"
+          }
+        },
+        "startDate": "https://schema.org/startDate",
+        "endDate": "https://schema.org/endDate"
+      }
+    },
+
+    "ElectedPosition": {
+      "$type": "https://schema.org/Role",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "roleName": "https://schema.org/roleName",
+        "memberOf": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "identifier": "https://schema.org/identifier",
+            "name": "https://schema.org/name"
+          }
+        },
+        "startDate": "https://schema.org/startDate",
+        "endDate": "https://schema.org/endDate"
+      }
+    },
+
+    "CompletedCourse": {
+      "$type": "https://schema.org/Course",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "provider": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "name": "https://schema.org/name"
+          }
+        },
+        "completionDate": "https://schema.org/endDate",
+        "additionalType": "https://schema.org/additionalType"
+      }
+    },
+
+    "LanguageProficiency": {
+      "$type": "https://schema.org/Language",
+      "fields": {
+        "name": "https://schema.org/name",
+        "additionalProperty": {
+          "$type": "https://schema.org/PropertyValue",
+          "propertyIDs": ["proficiencyLevel"],
+          "fields": {
+            "propertyID": "https://schema.org/propertyID",
+            "value": "https://schema.org/value"
+          }
+        }
+      }
+    },
+
+    "Credential": {
+      "$type": "https://schema.org/EducationalOccupationalCredential",
+      "fields": {
+        "credentialCategory": "https://schema.org/credentialCategory",
+        "educationalLevel": "https://schema.org/educationalLevel",
+        "validThrough": "https://schema.org/validThrough"
+      }
+    },
+
+    "ScheduleEvent": {
+      "$type": "https://schema.org/Event",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "startDate": "https://schema.org/startDate",
+        "endDate": "https://schema.org/endDate",
+        "additionalType": "https://schema.org/additionalType",
+        "doorTime": "https://schema.org/doorTime",
+        "maximumAttendeeCapacity": "https://schema.org/maximumAttendeeCapacity",
+        "remainingAttendeeCapacity": "https://schema.org/remainingAttendeeCapacity",
+        "eventStatus": "https://schema.org/eventStatus",
+        "location": {
+          "$type": "https://schema.org/Place",
+          "fields": {
+            "name": "https://schema.org/name",
+            "address": "https://schema.org/PostalAddress"
+          }
+        },
+        "organizer": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "identifier": "https://schema.org/identifier",
+            "name": "https://schema.org/name"
+          }
+        }
+      }
+    },
+
+    "ActivityPreference": {
+      "$type": "https://schema.org/VolunteerAction",
+      "fields": {
+        "identifier": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "alternateName": "https://schema.org/alternateName",
+        "location": {
+          "$type": "https://schema.org/Place",
+          "fields": {
+            "address": {
+              "$type": "https://schema.org/PostalAddress",
+              "fields": {
+                "addressLocality": "https://schema.org/addressLocality"
+              }
+            }
+          }
+        },
+        "provider": {
+          "$type": "https://schema.org/Organization",
+          "fields": {
+            "name": "https://schema.org/name"
+          }
+        }
+      }
+    }
+  }
+}
