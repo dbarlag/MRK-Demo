@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Button, Card, CardBlock, Divider, Heading, Paragraph } from 'rk-designsystem';
 import { PersonIcon, CalendarIcon, MegaphoneSpeakingIcon, BookIcon, ChevronRightIcon, ExternalLinkIcon, HeartIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
-import { assetPath } from '@/lib/basePath';
 import { fetchProfile } from '@/lib/api';
 import type { UserProfile } from '@/types';
 import styles from './HomePage.module.css';
@@ -159,7 +158,7 @@ export default function HomePage() {
           <div className={styles['cards-row']}>
             <div className={styles['card-col']}>
               <Card variant="default" data-color="neutral" className={styles['nyttig-card']}>
-                <img src={assetPath('/images/8e25fd9d-f245-434d-87f5-a15ffcd09fc9.png')} alt="" className={styles.image} />
+                <img src={'/images/8e25fd9d-f245-434d-87f5-a15ffcd09fc9.png'} alt="" className={styles.image} />
                 <CardBlock>
                   <div className={styles.container}>
                     <div className={styles.header}>
@@ -187,7 +186,7 @@ export default function HomePage() {
             </div>
             <div className={styles['card-col']}>
               <Card variant="default" data-color="neutral" className={styles['nyttig-card']}>
-                <img src={assetPath('/images/ba7aa2ee-bef2-4156-8589-44d097ed683c.png')} alt="" className={styles.image} />
+                <img src={'/images/ba7aa2ee-bef2-4156-8589-44d097ed683c.png'} alt="" className={styles.image} />
                 <CardBlock>
                   <div className={styles.container}>
                     <div className={styles.header}>

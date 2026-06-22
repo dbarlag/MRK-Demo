@@ -1,7 +1,6 @@
 'use client';
 
 import { useSession, signOut } from 'next-auth/react';
-import { assetPath } from '@/lib/basePath';
 import { Header } from 'rk-designsystem';
 
 const NAV_ITEMS = [
@@ -15,14 +14,14 @@ interface SiteHeaderProps {
   secondaryLogoSrc?: string;
 }
 
-export default function SiteHeader({ secondaryLogoSrc = assetPath('/images/28cee95e-f238-4c62-8519-15bcf9175329.png') }: SiteHeaderProps) {
+export default function SiteHeader({ secondaryLogoSrc = '/images/28cee95e-f238-4c62-8519-15bcf9175329.png' }: SiteHeaderProps) {
   const { data: session } = useSession();
 
   const handleUserClick = async () => {
     if (!window.confirm('Logg ut?')) return;
     let oktaLogoutUrl: string | undefined;
     try {
-      const res = await fetch(assetPath('/api/auth/okta-signout'));
+      const res = await fetch('/api/auth/okta-signout');
       if (res.ok) {
         const data = await res.json();
         oktaLogoutUrl = data.url;
@@ -31,7 +30,7 @@ export default function SiteHeader({ secondaryLogoSrc = assetPath('/images/28cee
       // fall through to NextAuth-only sign-out
     }
     await signOut({ redirect: false });
-    window.location.href = oktaLogoutUrl ?? assetPath('/login');
+    window.location.href = oktaLogoutUrl ?? '/login';
   };
 
   return (

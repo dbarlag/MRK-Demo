@@ -6,7 +6,6 @@ import { Button, Card, CardBlock, Heading, Pagination, Paragraph, Search, Tag, u
 import { Field, Label } from '@digdir/designsystemet-react';
 import { ArrowLeftIcon, CheckmarkIcon, LocationPinIcon } from '@navikt/aksel-icons';
 import SiteHeader from '../shared/SiteHeader';
-import { assetPath } from '@/lib/basePath';
 import {
   AUDIENCE_LABELS,
   AUDIENCE_ORDER,
@@ -172,7 +171,7 @@ export default function PreferanserPage({ activities }: Props) {
     const img = e.currentTarget;
     if (!img.dataset.fallback) {
       img.dataset.fallback = '1';
-      img.src = assetPath(FALLBACK_IMAGE);
+      img.src = FALLBACK_IMAGE;
     }
   };
 
@@ -265,7 +264,7 @@ export default function PreferanserPage({ activities }: Props) {
                     <CardBlock>
                       <div className={styles['card-image-wrap']}>
                         <img
-                          src={assetPath(imageFor(a.globalActivityName))}
+                          src={imageFor(a.globalActivityName)}
                           alt=""
                           className={styles['card-image']}
                           onError={handleImageError}

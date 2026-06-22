@@ -1,6 +1,5 @@
 'use client';
 
-import { assetPath } from '@/lib/basePath';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -25,14 +24,14 @@ const FILTER_CHIP_CLASSES: Record<FilterType, string> = {
 };
 
 const TYPE_ICONS: Record<string, string> = {
-  arrangement: assetPath('/images/fade87e0-5298-487a-a81e-9d4630042aad.png'),
-  kurs: assetPath('/images/829f2594-0e55-4578-bbcc-f627a26726a9.png'),
-  vakt: assetPath('/images/ac86b9ef-72d0-44b0-8e5c-5973ecfbdb75.png'),
+  arrangement: '/images/fade87e0-5298-487a-a81e-9d4630042aad.png',
+  kurs: '/images/829f2594-0e55-4578-bbcc-f627a26726a9.png',
+  vakt: '/images/ac86b9ef-72d0-44b0-8e5c-5973ecfbdb75.png',
 };
 const STATUS_ICONS: Record<string, string> = {
-  arrangement: assetPath('/images/908d27a8-7dc6-4ab7-a93a-1355ffd60eb4.png'),
-  kurs: assetPath('/images/01827980-7fbd-41f1-9758-ab3ba0333279.png'),
-  vakt: assetPath('/images/ea81b354-6a3e-4941-9785-dc92c46e77a5.png'),
+  arrangement: '/images/908d27a8-7dc6-4ab7-a93a-1355ffd60eb4.png',
+  kurs: '/images/01827980-7fbd-41f1-9758-ab3ba0333279.png',
+  vakt: '/images/ea81b354-6a3e-4941-9785-dc92c46e77a5.png',
 };
 
 const EVENTS_PER_WEEK = 5;

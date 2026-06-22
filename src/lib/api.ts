@@ -5,13 +5,8 @@ import { mockEvents, mockPameldinger } from '@/data/mockTimeplan';
 import { mockAktivitetPreferanser } from '@/data/mockAktivitetPreferanser';
 import type { UserProfile, Parorende, Erklering, Medlemskap, Aktivitet, Rolle, Verv, Kurs, Sprak, Sertifikat, TimeplanEvent, AktivitetPreferanser } from '@/types';
 
-// GitHub Pages static export: no API routes available, use mock data directly.
-// Set in next.config.mjs from GITHUB_PAGES=true; works on both server and client
-// because Next inlines values from `env` at build time.
-const isStatic = process.env.IS_STATIC_EXPORT === 'true';
-
+// Fetch from our own API routes; fall back to mock data if the request fails.
 async function get<T>(path: string, fallback: T): Promise<T> {
-  if (isStatic) return fallback;
   try {
     const res = await fetch(`/api${path}`);
     if (!res.ok) throw new Error(`API error: ${res.status}`);
@@ -46,7 +41,6 @@ export const fetchAktivitetPreferanser = () =>
   get<AktivitetPreferanser>('/user/aktivitet-preferanser', mockAktivitetPreferanser);
 
 export async function saveAktivitetPreferanser(prefs: AktivitetPreferanser): Promise<AktivitetPreferanser> {
-  if (isStatic) return prefs;
   try {
     const res = await fetch('/api/user/aktivitet-preferanser', {
       method: 'PUT',
