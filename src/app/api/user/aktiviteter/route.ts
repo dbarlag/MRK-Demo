@@ -8,18 +8,21 @@ export async function GET() {
   if (denied) return denied;
 
   try {
-    // Oslo district id (the only district in the Vakt `main` dataset today).
-    const res = await vakt.activities({ district_id: 'cb3462c0-4ed8-4b86-a66d-a1459bbaf61f' });
+    // The single top-level activity ("Fellesverket") is too coarse to show as a
+    // list, so we surface the concrete subactivities (Leksehjelp, Møteplass, …)
+    // — these are what a volunteer actually engages in. archived_at === null
+    // marks the still-active ones.
+    const res = await vakt.subactivities({ per_page: '250' });
 
     const aktiviteter: Aktivitet[] = res.data
-      .filter((a) => a.active === 1)
-      .map((a) => ({
-        id: a.id,
-        tittel: a.name,
+      .filter((s) => s.archived_at === null)
+      .map((s) => ({
+        id: s.id,
+        tittel: s.name,
         status: 'Pågående',
         statusColor: 'success',
         forening: 'Oslo Røde Kors',
-        startdato: new Date(a.created_at).toLocaleDateString('nb-NO'),
+        startdato: new Date(s.created_at).toLocaleDateString('nb-NO'),
         sluttdato: 'pågående',
       }));
 
