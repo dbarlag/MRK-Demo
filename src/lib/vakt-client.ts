@@ -84,3 +84,19 @@ export async function getRolesMap(): Promise<Record<string, string>> {
   const res = await vaktGet<VaktRole>('roles', { per_page: '250' });
   return Object.fromEntries(res.data.map((r) => [r.id, r.name]));
 }
+
+/**
+ * The most recent shift-blocks. shift-blocks is ordered oldest-first and ignores
+ * sort/date filters, so the newest entries live on the last page — we read
+ * meta.last_page and fetch that page.
+ */
+export async function getRecentShiftBlocks(): Promise<VaktShiftBlock[]> {
+  const first = await vaktGet<VaktShiftBlock>('shift-blocks', { per_page: '250' });
+  const lastPage = first.meta.last_page;
+  if (lastPage <= 1) return first.data;
+  const last = await vaktGet<VaktShiftBlock>('shift-blocks', {
+    per_page: '250',
+    page: String(lastPage),
+  });
+  return last.data;
+}

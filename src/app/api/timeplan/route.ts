@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/api-auth';
-import { vakt } from '@/lib/vakt-client';
+import { getRecentShiftBlocks } from '@/lib/vakt-client';
 import type { TimeplanEvent } from '@/types';
 
 const DAGER = ['Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'];
@@ -11,12 +11,18 @@ export async function GET() {
   if (denied) return denied;
 
   try {
-    const res = await vakt.shiftBlocks();
+    const blocks = (await getRecentShiftBlocks()).filter((sb) => sb.start_at);
 
-    const sorted = res.data
-      .filter((sb) => sb.start_at)
-      .sort((a, b) => new Date(b.start_at).getTime() - new Date(a.start_at).getTime())
-      .slice(0, 20);
+    // Prefer upcoming shifts (ascending); if none are in the future, fall back
+    // to the most recent ones (descending).
+    const now = Date.now();
+    const upcoming = blocks
+      .filter((sb) => new Date(sb.start_at).getTime() >= now)
+      .sort((a, b) => new Date(a.start_at).getTime() - new Date(b.start_at).getTime());
+    const recent = [...blocks].sort(
+      (a, b) => new Date(b.start_at).getTime() - new Date(a.start_at).getTime(),
+    );
+    const sorted = (upcoming.length ? upcoming : recent).slice(0, 20);
 
     const events: TimeplanEvent[] = sorted.map((sb) => {
       const start = new Date(sb.start_at);
