@@ -101,49 +101,39 @@ function EventCard({ event }: { event: TimeplanEvent }) {
   );
 }
 
-/* ---- Pagination with arrows at edges ---- */
-function WeekPagination({ currentWeek, totalWeeks, onChangeWeek }: {
-  currentWeek: number;
-  totalWeeks: number;
-  onChangeWeek: (week: number) => void;
+/* ---- Single pager: ‹ Uke N  Uke M … › ---- */
+function WeekPagination({ weekLabels, currentIndex, onChangeIndex }: {
+  weekLabels: string[];
+  currentIndex: number;
+  onChangeIndex: (index: number) => void;
 }) {
   const { pages, prevButtonProps, nextButtonProps } = usePagination({
-    currentPage: currentWeek,
-    totalPages: totalWeeks,
-    onChange: (_e, page) => onChangeWeek(page),
+    currentPage: currentIndex + 1,
+    totalPages: Math.max(1, weekLabels.length),
+    onChange: (_e, page) => onChangeIndex(page - 1),
   });
 
   return (
     <div className={styles['week-pagination']}>
-      <Pagination data-color="neutral" aria-label="Forrige uke">
+      <Pagination data-color="neutral" aria-label="Ukenavigering">
         <Pagination.List>
           <Pagination.Item>
             <Pagination.Button {...prevButtonProps} aria-label="Forrige uke" />
           </Pagination.Item>
+          {pages
+            .filter(({ page }) => typeof page === 'number')
+            .map(({ page, itemKey, buttonProps }) => (
+              <Pagination.Item key={itemKey}>
+                <Pagination.Button {...buttonProps} aria-label={weekLabels[(page as number) - 1]}>
+                  {weekLabels[(page as number) - 1]}
+                </Pagination.Button>
+              </Pagination.Item>
+            ))}
+          <Pagination.Item>
+            <Pagination.Button {...nextButtonProps} aria-label="Neste uke" />
+          </Pagination.Item>
         </Pagination.List>
       </Pagination>
-
-      <Pagination data-color="neutral" aria-label="Ukenavigering">
-        <Pagination.List>
-          {pages.filter(({ page }) => typeof page === 'number').map(({ page, itemKey, buttonProps }) => (
-            <Pagination.Item key={itemKey}>
-              <Pagination.Button {...buttonProps} aria-label={`Uke ${page}`}>
-                Uke {page}
-              </Pagination.Button>
-            </Pagination.Item>
-          ))}
-        </Pagination.List>
-      </Pagination>
-
-      <div className={styles['next-arrow']}>
-        <Pagination data-color="neutral" aria-label="Neste uke">
-          <Pagination.List>
-            <Pagination.Item>
-              <Pagination.Button {...nextButtonProps} aria-label="Neste uke" />
-            </Pagination.Item>
-          </Pagination.List>
-        </Pagination>
-      </div>
     </div>
   );
 }
@@ -153,7 +143,7 @@ export default function TimeplanPage() {
   const [pameldinger, setPameldinger] = useState<TimeplanEvent[]>([]);
   const [activeTab, setActiveTab] = useState<'kommende' | 'mine-påmeldinger'>('kommende');
   const [activeFilters, setActiveFilters] = useState<Set<FilterType>>(new Set(ALL_FILTERS));
-  const [currentWeek, setCurrentWeek] = useState(1);
+  const [currentWeek, setCurrentWeek] = useState(0);
 
   useEffect(() => {
     fetchTimeplan().then(setEvents).catch(console.error);
@@ -173,9 +163,22 @@ export default function TimeplanPage() {
   };
 
   const filteredEvents = events.filter((e) => activeFilters.has(e.type));
-  const totalWeeks = Math.max(1, Math.ceil(filteredEvents.length / EVENTS_PER_WEEK));
-  const startIdx = (currentWeek - 1) * EVENTS_PER_WEEK;
-  const pagedEvents = filteredEvents.slice(startIdx, startIdx + EVENTS_PER_WEEK);
+
+  // Group into real weeks when the events carry an ISO week number (live Vakt
+  // data); otherwise fall back to chunks of EVENTS_PER_WEEK (mock fallback).
+  const hasWeeks = filteredEvents.some((e) => typeof e.uke === 'number');
+  const weekBuckets: { label: string; events: TimeplanEvent[] }[] = hasWeeks
+    ? [...new Set(filteredEvents.map((e) => e.uke).filter((u): u is number => typeof u === 'number'))]
+        .sort((a, b) => a - b)
+        .map((uke) => ({ label: `Uke ${uke}`, events: filteredEvents.filter((e) => e.uke === uke) }))
+    : Array.from({ length: Math.ceil(filteredEvents.length / EVENTS_PER_WEEK) }, (_, i) => ({
+        label: `Uke ${i + 1}`,
+        events: filteredEvents.slice(i * EVENTS_PER_WEEK, i * EVENTS_PER_WEEK + EVENTS_PER_WEEK),
+      }));
+
+  const weekLabels = weekBuckets.map((w) => w.label);
+  const safeIndex = Math.min(currentWeek, Math.max(0, weekBuckets.length - 1));
+  const pagedEvents = weekBuckets[safeIndex]?.events ?? [];
   const displayEvents = activeTab === 'kommende' ? pagedEvents : pameldinger;
 
   return (
@@ -259,7 +262,7 @@ export default function TimeplanPage() {
         {/* Content */}
         <section className={styles.kmmende}>
           <div className={styles['filter-menu']}>
-            <WeekPagination currentWeek={currentWeek} totalWeeks={totalWeeks} onChangeWeek={setCurrentWeek} />
+            <WeekPagination weekLabels={weekLabels} currentIndex={safeIndex} onChangeIndex={setCurrentWeek} />
           </div>
           <div className={styles.body}>
             {displayEvents.length > 0 ? (

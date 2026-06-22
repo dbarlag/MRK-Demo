@@ -6,6 +6,17 @@ import type { TimeplanEvent } from '@/types';
 const DAGER = ['Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'];
 const MAANEDER = ['JAN', 'FEB', 'MAR', 'APR', 'MAI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DES'];
 
+/** ISO-8601 week number (1-53), Monday-based. */
+function isoWeek(date: Date): number {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = (d.getUTCDay() + 6) % 7; // Mon=0 … Sun=6
+  d.setUTCDate(d.getUTCDate() - dayNum + 3); // nearest Thursday
+  const firstThursday = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+  const firstDayNum = (firstThursday.getUTCDay() + 6) % 7;
+  firstThursday.setUTCDate(firstThursday.getUTCDate() - firstDayNum + 3);
+  return 1 + Math.round((d.getTime() - firstThursday.getTime()) / (7 * 24 * 3600 * 1000));
+}
+
 export async function GET() {
   const denied = await requireAuth();
   if (denied) return denied;
@@ -33,6 +44,7 @@ export async function GET() {
         dag: DAGER[start.getDay()],
         dato: start.getDate(),
         maaned: MAANEDER[start.getMonth()],
+        uke: isoWeek(start),
         tittel: sb.title,
         startTid: start.toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' }),
         sluttTid: end.toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' }),

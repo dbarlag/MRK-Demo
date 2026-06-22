@@ -111,6 +111,7 @@ export interface TimeplanEvent {
   dag: string;
   dato: number;
   maaned: string;
+  uke?: number;
   tittel: string;
   startTid: string;
   sluttTid: string;
