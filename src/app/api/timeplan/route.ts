@@ -33,7 +33,7 @@ export async function GET() {
     const recent = [...blocks].sort(
       (a, b) => new Date(b.start_at).getTime() - new Date(a.start_at).getTime(),
     );
-    const sorted = (upcoming.length ? upcoming : recent).slice(0, 20);
+    const sorted = (upcoming.length ? upcoming : recent).slice(0, 60);
 
     const events: TimeplanEvent[] = sorted.map((sb) => {
       const start = new Date(sb.start_at);
