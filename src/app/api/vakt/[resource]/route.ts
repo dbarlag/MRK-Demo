@@ -12,6 +12,33 @@ const RESOURCE_MAP: Record<string, keyof typeof vakt> = {
   roles: 'roles',
 };
 
+// Only these query params are forwarded upstream. Anything else (arbitrary
+// filters a caller might try) is dropped, so the proxy can't be used to mine
+// the Vakt API beyond plain pagination.
+const ALLOWED_PARAMS = new Set(['page', 'per_page']);
+const MAX_PER_PAGE = 100;
+
+/** Keep only allowlisted params, drop the rest, and clamp per_page so a single
+ * call can't pull an unbounded amount of data. */
+function sanitizeParams(searchParams: URLSearchParams): Record<string, string> {
+  const out: Record<string, string> = {};
+  searchParams.forEach((value, key) => {
+    if (!ALLOWED_PARAMS.has(key)) return;
+    if (key === 'per_page') {
+      const n = Number.parseInt(value, 10);
+      if (!Number.isFinite(n) || n < 1) return;
+      out.per_page = String(Math.min(n, MAX_PER_PAGE));
+      return;
+    }
+    if (key === 'page') {
+      const n = Number.parseInt(value, 10);
+      if (!Number.isFinite(n) || n < 1) return;
+      out.page = String(n);
+    }
+  });
+  return out;
+}
+
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ resource: string }> },
@@ -25,8 +52,7 @@ export async function GET(
     return NextResponse.json({ error: `Unknown resource: ${resource}` }, { status: 404 });
   }
 
-  const queryParams: Record<string, string> = {};
-  req.nextUrl.searchParams.forEach((v, k) => { queryParams[k] = v; });
+  const queryParams = sanitizeParams(req.nextUrl.searchParams);
 
   try {
     const data = await vakt[method](Object.keys(queryParams).length ? queryParams : undefined);
