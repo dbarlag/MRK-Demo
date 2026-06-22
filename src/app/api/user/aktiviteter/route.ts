@@ -8,7 +8,8 @@ export async function GET() {
   if (denied) return denied;
 
   try {
-    const res = await vakt.activities({ district_id: '87ca20f5-fa22-4969-b9c9-55ca6c813b7b' });
+    // Oslo district id (the only district in the Vakt `main` dataset today).
+    const res = await vakt.activities({ district_id: 'cb3462c0-4ed8-4b86-a66d-a1459bbaf61f' });
 
     const aktiviteter: Aktivitet[] = res.data
       .filter((a) => a.active === 1)

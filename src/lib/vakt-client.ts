@@ -54,7 +54,33 @@ export const vakt = {
   users: (params?: Record<string, string>) => vaktGet<VaktUser>('users', params),
 };
 
+/**
+ * Look up a Vakt user by their Okta id.
+ *
+ * NOTE: the `main` /users endpoint does NOT support filtering by okta_id (the
+ * query param is silently ignored and the full list is returned). So we page
+ * through users and match in code. per_page caps at 250 upstream; the cap below
+ * is a safety stop so a misconfigured response can't loop forever.
+ */
 export async function getUserByOktaId(oktaId: string): Promise<VaktUser | null> {
-  const page = await vaktGet<VaktUser>('users', { okta_id: oktaId, per_page: '1' });
-  return page.data[0] ?? null;
+  const MAX_PAGES = 10;
+  for (let page = 1; page <= MAX_PAGES; page += 1) {
+    const res = await vaktGet<VaktUser>('users', { per_page: '250', page: String(page) });
+    const match = res.data.find((u) => u.okta_id === oktaId);
+    if (match) return match;
+    if (page >= res.meta.last_page) break;
+  }
+  return null;
+}
+
+/** A user's shifts. shifts?user_id= IS supported upstream (verified). */
+export async function getUserShifts(userId: string): Promise<VaktShift[]> {
+  const res = await vaktGet<VaktShift>('shifts', { user_id: userId, per_page: '250' });
+  return res.data;
+}
+
+/** Map of role id -> role name. The role set is tiny (currently 4). */
+export async function getRolesMap(): Promise<Record<string, string>> {
+  const res = await vaktGet<VaktRole>('roles', { per_page: '250' });
+  return Object.fromEntries(res.data.map((r) => [r.id, r.name]));
 }
