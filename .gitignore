@@ -26,3 +26,6 @@ npm-debug.log*
 
 # typescript
 tsconfig.tsbuildinfo
+
+# local-only docs
+docs/arkitektur.md
